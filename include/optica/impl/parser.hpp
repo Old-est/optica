@@ -49,12 +49,9 @@ public:
 
     auto lexems = utils::SplitString(data, ' ');
 
-    if (lexems.empty()) {
-    }
-
     auto start = lexems.begin();
     auto end = lexems.end();
-    for (; start != end;) {
+    for (;;) {
 
       constexpr auto Size = sizeof...(Opts);
 
@@ -63,7 +60,6 @@ public:
                           auto [status, value] =
                               std::get<Is>(options_).TryConsume(start, end);
                           if (status != ParsingStatus::Error) {
-                            std::cout << value.value() << '\n';
                             std::get<Is>(result.values_) =
                                 std::move(value); // или GetName() вместо Is
                           }
@@ -71,11 +67,15 @@ public:
                         }()) ||
                         ...);
 
-        if (!matched) {
+        if (!matched and (start != end)) {
           std::cerr << "Unknown Argument: " << *start << '\n';
           std::exit(1);
         }
       }(std::make_index_sequence<Size>{});
+
+      if (start == end) {
+        break;
+      }
     }
 
     return result;

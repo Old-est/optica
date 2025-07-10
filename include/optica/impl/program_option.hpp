@@ -21,6 +21,13 @@ template <Property... Props> struct ProgramOption : Props... {
       -> std::pair<ParsingStatus,
                    std::optional<decltype(this->GetValueType())>> {
     if (start == end) {
+      if constexpr (HasRequiredProperty<Props...>) {
+        std::println("Option '{}' is required but not found", this->name.value);
+        std::exit(2);
+      }
+      if constexpr (HasDefaultValueProperty<Props...>) {
+        return {ParsingStatus::ParsedFromDefault, this->GetDefaultValue()};
+      }
       return {ParsingStatus::Error, std::nullopt};
     }
     std::string_view token = *start;
