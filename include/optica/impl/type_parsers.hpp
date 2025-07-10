@@ -5,19 +5,19 @@
 #include <string_view>
 namespace optica {
 
-template <typename T>
-constexpr std::optional<T> ParseType(std::string_view data) {
+template <typename T> constexpr bool ParseType(std::string_view data, T &) {
   static_assert(sizeof(T) == 0, "No try_parse specialization for this type T");
-  return std::nullopt;
+  return false;
 }
 
-template <> constexpr std::optional<int> ParseType<int>(std::string_view data) {
+template <> constexpr bool ParseType<int>(std::string_view data, int &res) {
   int val{};
   auto [ptr, ec] = std::from_chars(data.data(), data.data() + data.size(), val);
   if (std::errc() == ec) {
-    return val;
+    res = val;
+    return true;
   }
-  return std::nullopt;
+  return false;
 }
 
 } // namespace optica

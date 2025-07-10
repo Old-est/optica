@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.30)
 
 project(optica)
-
+if(NOT CMAKE_COLOR_DIAGNOSTICS)
+    set(CMAKE_COLOR_DIAGNOSTICS ON)
+endif()
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -14,8 +16,10 @@ BASE_DIRS
   include
 FILES
   include/optica/optica.hpp
+  include/optica/impl/utils.hpp
   include/optica/impl/fixed_string.hpp
   include/optica/impl/properties.hpp
+  include/optica/impl/program_option_builder.hpp
   include/optica/impl/program_option.hpp
   include/optica/impl/parser.hpp
   include/optica/impl/type_parsers.hpp

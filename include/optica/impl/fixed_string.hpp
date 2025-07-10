@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <string_view>
 namespace optica {
 
 template <std::size_t N> struct FixedString {
@@ -23,6 +24,8 @@ template <std::size_t N> struct FixedString {
       return true;
     }
   }
+
+  constexpr operator std::string_view() const noexcept { return value; }
 
   char value[N]{};
 };

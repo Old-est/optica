@@ -1,117 +1,120 @@
 #pragma once
 
-#include <iostream>
-#include <optional>
-#include <ranges>
-#include <string_view>
-#include <tuple>
-#include <vector>
-
-#include "fixed_string.hpp"
 #include "program_option.hpp"
+#include "utils.hpp"
+#include <iostream>
 namespace optica {
 
-template <FixedString Name, typename... Options>
-concept HasName = (... || (Options::name == Name));
+namespace details {
 
-template <typename... Options> class Parser;
+template <typename Tuple> struct tuple_types;
 
-enum class Result {
-  OK,
-  Error,
+template <typename... Ts> struct tuple_types<std::tuple<Ts...>> {
+  template <typename F> static constexpr auto expand(F &&f) {
+    return std::forward<F>(f).template operator()<Ts...>();
+  }
 };
 
-template <typename... Options> class ParserResult {
+template <typename T> constexpr auto make_program_option(T &&t) {
+  using Decayed = std::decay_t<T>;
+
+  if constexpr (IsProgramOption<Decayed>) {
+    return std::forward<T>(t);
+  } else {
+    return tuple_types<typename Decayed::Properties>::expand(
+        [&]<typename... Props>() {
+          return static_cast<ProgramOption<Props...>>(std::forward<T>(t));
+        });
+  }
+}
+
+template <FixedString Name, int idx> struct EnsureIndexExists {
+  static_assert(idx != -1, "ProgramOption with the given name not found.");
+  static constexpr std::size_t value = idx;
+};
+
+} // namespace details
+
+template <typename... Values> class ParserResult;
+
+template <typename... Opts> class Parser {
 public:
-  template <FixedString Name>
-    requires HasName<Name, Options...>
-  constexpr auto Get() const noexcept {
-    constexpr std::size_t index =
-        GetIndexByName<Name>(std::index_sequence_for<Options...>{});
-    return std::get<index>(values_);
+  template <typename... Args>
+  constexpr Parser(Args &&...opts) noexcept
+      : options_(details::make_program_option(std::forward<Args>(opts))...) {}
+
+  ParserResult<Opts...> Parse(std::string_view data) const {
+    using ReturnType = ParserResult<Opts...>;
+    auto result = ReturnType{};
+
+    auto lexems = utils::SplitString(data, ' ');
+
+    if (lexems.empty()) {
+    }
+
+    auto start = lexems.begin();
+    auto end = lexems.end();
+    for (; start != end;) {
+
+      constexpr auto Size = sizeof...(Opts);
+
+      [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+        bool matched = (([&] {
+                          auto [status, value] =
+                              std::get<Is>(options_).TryConsume(start, end);
+                          if (status != ParsingStatus::Error) {
+                            std::cout << value.value() << '\n';
+                            std::get<Is>(result.values_) =
+                                std::move(value); // или GetName() вместо Is
+                          }
+                          return status == ParsingStatus::Ok;
+                        }()) ||
+                        ...);
+
+        if (!matched) {
+          std::cerr << "Unknown Argument: " << *start << '\n';
+          std::exit(1);
+        }
+      }(std::make_index_sequence<Size>{});
+    }
+
+    return result;
+  }
+
+private:
+  std::tuple<Opts...> options_;
+};
+
+template <typename... Args>
+Parser(Args &&...args) -> Parser<
+    decltype(details::make_program_option(std::forward<Args>(args)))...>;
+
+template <typename... Opts> class ParserResult {
+public:
+  constexpr ParserResult() noexcept = default;
+
+  template <FixedString Name> constexpr auto Get() const noexcept {
+    constexpr int idx_raw =
+        GetIndexByName<Name>(std::index_sequence_for<Opts...>{});
+    constexpr int idx = details::EnsureIndexExists<Name, idx_raw>::value;
+    return std::get<idx>(values_);
   }
 
 private:
   template <FixedString Name, std::size_t... Is>
-  static constexpr std::size_t
-  GetIndexByName(std::index_sequence<Is...> /*idxs*/) {
-    std::size_t index = -1;
-    [[maybe_unused]] bool found =
-        ((Options::name == Name ? (index = Is, true) : false) || ...);
-    return index;
-  }
-
-private:
-  friend Parser<Options...>;
-
-  Result result_{Result::OK};
-  std::tuple<std::optional<typename Options::value_type>...> values_;
-};
-
-template <typename... Options> class Parser {
-public:
-  template <typename... Opts>
-  constexpr Parser(Opts &&...opts) noexcept
-      : types_(ToProgramOptionT<Opts>(std::forward<Opts>(opts))...) {}
-
-  auto Parse(int argc, char **argv) const -> ParserResult<Options...>;
-  auto Parse(std::string_view data) const -> ParserResult<Options...>;
-
-private:
-  std::tuple<Options...> types_;
-};
-
-template <typename... Opts>
-Parser(Opts &&...) -> Parser<ToProgramOptionT<Opts>...>;
-
-template <typename... Options>
-auto Parser<Options...>::Parse(int argc, char **argv) const
-    -> ParserResult<Options...> {
-  ParserResult<Options...> result;
-  std::vector<std::string_view> argv_data(argv + 1, argv + argc);
-
-  auto parse_one = [&](auto I) {
-    constexpr size_t index = decltype(I)::value;
-    const auto &opt = std::get<index>(types_);
-    using return_type =
-        std::decay_t<decltype(std::get<index>(result.values_))>::value_type;
-    auto parsed = opt.template TryParse<return_type>(argv_data);
-    if (parsed) {
-      std::get<index>(result.values_) = std::move(parsed);
-    }
-  };
-
-  [&]<std::size_t... Is>(std::index_sequence<Is...>) {
-    (parse_one(std::integral_constant<std::size_t, Is>{}), ...);
-  }(std::index_sequence_for<Options...>{});
-  return result;
-}
-
-template <typename... Options>
-auto Parser<Options...>::Parse(std::string_view data) const
-    -> ParserResult<Options...> {
-  ParserResult<Options...> result;
-  auto res = std::ranges::views::split(data, ' ') |
-             std::views::transform([](auto &&r) {
-               return std::string_view{r.begin(), r.end()};
-             }) |
-             std::ranges::to<std::vector<std::string_view>>();
-  auto end = res.end();
-  for (auto start = res.begin(); start != end;) {
-
-    constexpr auto N = sizeof...(Options);
-    [&]<std::size_t... I>(std::index_sequence<I...>) {
-      bool matched = ((std::get<I>(types_).TryConsume(
-                          start, end, std::get<I>(result.values_))) ||
-                      ...);
-      if (!matched) {
-        std::cerr << "Unknown Argument: " << *start << '\n';
-        std::exit(1);
+  static consteval int GetIndexByName(std::index_sequence<Is...> idxs) {
+    constexpr std::array names = {Opts::GetName()...};
+    for (std::size_t i = 0; i < names.size(); ++i) {
+      if (names[i] == Name) {
+        return i;
       }
-    }(std::make_index_sequence<N>{});
+    };
+    return -1;
   }
 
-  return result;
-}
+private:
+  friend class Parser<Opts...>;
+  std::tuple<std::optional<typename Opts::value_type>...> values_;
+};
 
 } // namespace optica
