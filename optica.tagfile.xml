@@ -51,11 +51,11 @@
       <arglist>() const noexcept</arglist>
     </member>
     <member kind="variable">
-      <type>std::array&lt; char, N &gt;</type>
+      <type>char</type>
       <name>value</name>
       <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
-      <anchor>a4abe993bad8e323f07843bf5e183b7ed</anchor>
-      <arglist></arglist>
+      <anchor>a8c95c7e16b7d39866e04643205e9f872</anchor>
+      <arglist>[N]</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -86,5 +86,26 @@
   <compound kind="concept">
     <name>optica::Property</name>
     <filename>conceptoptica_1_1_property.html</filename>
+  </compound>
+  <compound kind="namespace">
+    <name>optica</name>
+    <filename>namespaceoptica.html</filename>
+    <class kind="class">optica::ArityProperty</class>
+    <class kind="class">optica::Exact</class>
+    <class kind="struct">optica::FixedString</class>
+    <class kind="class">optica::OneOrMore</class>
+    <class kind="class">optica::PropertyBase</class>
+    <concept>optica::Property</concept>
+    <concept>optica::IsNumericArity</concept>
+    <concept>optica::IsTypedArity</concept>
+    <concept>optica::Arity</concept>
+    <concept>optica::IsArityProperty</concept>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>ParseType</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a0c335c6c57d9af478c3c4247e01da80e</anchor>
+      <arglist>(std::string_view data, T &amp;)</arglist>
+    </member>
   </compound>
 </tagfile>
