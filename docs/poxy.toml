@@ -1,6 +1,9 @@
 name = 'optica'
 author = 'Dmitrii Tupitsyn'
-cpp = 23
+cpp = 20
+github = 'Old-est/optica'
+license = ['MIT', 'https://github.com/Old-est/optica/blob/main/LICENSE']
+navbar = ['namespaces', 'annotated']
 # changelog = true
 
 [warnings]
