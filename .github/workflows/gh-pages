@@ -34,7 +34,7 @@ jobs:
               run: |
                   git fetch origin main:refs/remotes/origin/main --tags --force
                   git remote set-head origin -a
-                  git checkout master
+                  git checkout main
                   git pull --force
                   cd docs
                   poxy --verbose --git-tags
