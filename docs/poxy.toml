@@ -1,0 +1,15 @@
+name = 'optica'
+author = 'Dmitrii Tupitsyn'
+cpp = 23
+# changelog = true
+
+[warnings]
+enabled = true
+treat_as_errors = false
+undocumented = true
+
+[sources]
+recursive_paths = [ '../include' ]
+patterns        = [ '*.h', '*.hpp', '*.md' ]
+strip_paths     = [ '../include' ]
+

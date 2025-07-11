@@ -1,23 +1,29 @@
 #pragma once
 
 #include <charconv>
-#include <optional>
 #include <string_view>
 namespace optica {
 
-template <typename T>
-constexpr std::optional<T> ParseType(std::string_view data) {
+/**
+ * @brief Parsing function for std::string_view
+ *
+ * @tparam T Type into string should be parsed
+ * @param data Actual std::string_view with data
+ * @return bool that shows is parsing successful
+ */
+template <typename T> constexpr bool ParseType(std::string_view data, T &) {
   static_assert(sizeof(T) == 0, "No try_parse specialization for this type T");
-  return std::nullopt;
+  return false;
 }
 
-template <> constexpr std::optional<int> ParseType<int>(std::string_view data) {
+template <> constexpr bool ParseType<int>(std::string_view data, int &res) {
   int val{};
   auto [ptr, ec] = std::from_chars(data.data(), data.data() + data.size(), val);
   if (std::errc() == ec) {
-    return val;
+    res = val;
+    return true;
   }
-  return std::nullopt;
+  return false;
 }
 
 } // namespace optica
