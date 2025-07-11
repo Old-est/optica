@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tagfile doxygen_version="1.9.8">
+  <compound kind="class">
+    <name>optica::ArityProperty</name>
+    <filename>structoptica_1_1_arity_property.html</filename>
+    <templarg>Arity Value</templarg>
+    <base>PropertyBase&lt; ArityProperty&lt; Value &gt; &gt;</base>
+    <member kind="function" static="yes">
+      <type>static constexpr std::size_t</type>
+      <name>GetNumberArgs</name>
+      <anchorfile>structoptica_1_1_arity_property.html</anchorfile>
+      <anchor>aa42f8e4d0a6f001ad5b514c5e7d33f01</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::Exact</name>
+    <filename>structoptica_1_1_exact.html</filename>
+    <templarg>std::size_t Size</templarg>
+    <member kind="function" static="yes">
+      <type>static constexpr std::size_t</type>
+      <name>GetNumberArgs</name>
+      <anchorfile>structoptica_1_1_exact.html</anchorfile>
+      <anchor>a0e309646e77ff8ff3312d93329a38430</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>optica::FixedString</name>
+    <filename>structoptica_1_1_fixed_string.html</filename>
+    <templarg>std::size_t N</templarg>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>FixedString</name>
+      <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
+      <anchor>a85add4e6e0eda02eb771c93ed013f6af</anchor>
+      <arglist>(const char(&amp;str)[N]) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>operator==</name>
+      <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
+      <anchor>adbace514494cfcb4355f2462a65a22ab</anchor>
+      <arglist>(const FixedString&lt; U &gt; &amp;other) const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>operator std::string_view</name>
+      <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
+      <anchor>a11ef25bf43bc826255319c0c297d5495</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="variable">
+      <type>std::array&lt; char, N &gt;</type>
+      <name>value</name>
+      <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
+      <anchor>a4abe993bad8e323f07843bf5e183b7ed</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::OneOrMore</name>
+    <filename>structoptica_1_1_one_or_more.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>optica::PropertyBase</name>
+    <filename>structoptica_1_1_property_base.html</filename>
+    <templarg>typename Derived</templarg>
+  </compound>
+  <compound kind="concept">
+    <name>optica::Arity</name>
+    <filename>conceptoptica_1_1_arity.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::IsArityProperty</name>
+    <filename>conceptoptica_1_1_is_arity_property.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::IsNumericArity</name>
+    <filename>conceptoptica_1_1_is_numeric_arity.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::IsTypedArity</name>
+    <filename>conceptoptica_1_1_is_typed_arity.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::Property</name>
+    <filename>conceptoptica_1_1_property.html</filename>
+  </compound>
+</tagfile>
