@@ -103,9 +103,9 @@
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_property.html">Property</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_is_numeric_arity.html">IsNumericArity</a>
             </dt>
-            <dd>Concept for determining is T Property or not.</dd>
+            <dd>Concept determining is Arity numeric.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_is_typed_arity.html">IsTypedArity</a>
@@ -113,19 +113,19 @@
             <dd>Concept determining is Arity one of not numeric.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_is_numeric_arity.html">IsNumericArity</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_property.html">Property</a>
             </dt>
-            <dd>Concept determining is Arity numeric.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_arity.html">Arity</a>
-            </dt>
-            <dd>Concept for any related to Arguments type.</dd>
+            <dd>Concept for determining is T Property or not.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_is_arity_property.html">IsArityProperty</a>
             </dt>
             <dd>IsArityOrNot.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_arity.html">Arity</a>
+            </dt>
+            <dd>Concept for any related to Arguments type.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -137,6 +137,12 @@
               T&amp;) →  bool <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Parsing function for <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#ac3181a5661e573da2c9ca34e6094058a">ParseType&lt;int&gt;</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
+              int&amp; res) →  bool <span class="m-label m-flat m-primary">constexpr</span></span>
+            </dt>
+            <dd>Specialization for parsing int values.</dd>
           </dl>
         </section>
         <section>
@@ -173,6 +179,37 @@
                 <tr>
                   <th>Returns</th>
                   <td>bool that shows is parsing successful</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac3181a5661e573da2c9ca34e6094058a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#ac3181a5661e573da2c9ca34e6094058a">ParseType&lt;int&gt;</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
+              int&amp; res) <span class="m-label m-primary">constexpr</span></span></span>
+            </h3>
+            <p>Specialization for parsing int values.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">data</td>
+                  <td>Actual <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data</td>
+                </tr>
+                <tr>
+                  <td>res</td>
+                  <td>Output result</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>bool in case if parsing isn't successful \showinlinesource</td>
                 </tr>
               </tfoot>
             </table>

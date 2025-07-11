@@ -107,5 +107,12 @@
       <anchor>a0c335c6c57d9af478c3c4247e01da80e</anchor>
       <arglist>(std::string_view data, T &amp;)</arglist>
     </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>ParseType&lt; int &gt;</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>ac3181a5661e573da2c9ca34e6094058a</anchor>
+      <arglist>(std::string_view data, int &amp;res)</arglist>
+    </member>
   </compound>
 </tagfile>
