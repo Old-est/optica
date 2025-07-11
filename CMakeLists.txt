@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+include(cmake/deps.cmake)
+
 add_library(optica INTERFACE)
 add_library(optica::optica ALIAS optica)
 
@@ -26,3 +28,11 @@ FILES
 )
 
 add_subdirectory(examples)
+
+option(OPTICA_BUILD_TESTS "Build tests" OFF)
+
+if(OPTICA_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
