@@ -53,6 +53,6 @@ template <std::size_t N> struct FixedString {
   /**
    * @brief storage for symbols
    */
-  std::array<char, N> value{};
+  char value[N]{};
 };
 } // namespace optica
