@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+name: gh-pages
+
+on:
+  push:
+    branches: [ "main" ]
+    
+  workflow_dispatch:
+
+jobs:
+    gh-pages:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Install dependencies
+              run: |
+                  sudo apt -y update
+                  sudo apt -y install --no-install-recommends git doxygen
+                  pip3 install --user --upgrade poxy
+
+            - name: Generate docs
+              run: |
+                  git fetch origin main:refs/remotes/origin/main --tags --force
+                  git remote set-head origin -a
+                  git checkout main
+                  git pull --force
+                  cd docs
+                  poxy --verbose --git-tags
+
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./docs/html
