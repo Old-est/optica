@@ -16,6 +16,14 @@ template <typename T> constexpr bool ParseType(std::string_view data, T &) {
   return false;
 }
 
+/**
+ * @brief Specialization for parsing int values
+ *
+ * @param data Actual std::string_view data
+ * @param res Output result
+ * @return bool in case if parsing isn't successful
+ * \showinlinesource
+ */
 template <> constexpr bool ParseType<int>(std::string_view data, int &res) {
   int val{};
   auto [ptr, ec] = std::from_chars(data.data(), data.data() + data.size(), val);
