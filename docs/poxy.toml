@@ -13,6 +13,6 @@ undocumented = true
 
 [sources]
 recursive_paths = [ '../include' ]
-patterns        = [ '*.h', '*.hpp', '*.md' ]
+patterns        = [ '*.h', '*.hpp', '*.cppm', '*.md' ]
 strip_paths     = [ '../include' ]
 
