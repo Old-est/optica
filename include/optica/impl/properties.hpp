@@ -318,6 +318,12 @@ concept BindPropertyType = details::is_bind_property<T>::value;
 template <typename... Ts>
 concept HasBindPropertyType = (BindPropertyType<Ts> || ...);
 
+template <typename... Ts>
+concept SameTypes =
+    (std::is_same_v<Ts,
+                    typename std::tuple_element<0, std::tuple<Ts...>>::type> &&
+     ...);
+
 struct VarianPropertyTag {};
 
 /**

@@ -10,7 +10,9 @@ int main(int argc, char *argv[]) {
 
   constexpr auto real_opt = optica::CreateOption(mem);
 
-  std::println("{}", real_opt.GenerateDescription());
-
+  for (const auto &tokens : optica::Tokenizer(
+           "--Today -is Mon, Tue, Wed --Sample={1, 2, 3} -zxvf")) {
+    std::println("Token is: {}", tokens);
+  }
   return 0;
 }

@@ -11,10 +11,21 @@ namespace optica {
  *
  */
 template <Property... Properties> struct Option : Properties... {
+  /**
+   * @brief Constructs Option class from Properties
+   *
+   * @tparam Props Properties types
+   * @param props Properties
+   */
   template <typename... Props>
   constexpr Option(Props &&...props) noexcept
       : Properties(std::forward<Props>(props))... {}
 
+  /**
+   * @brief Generates Description for option
+   *
+   * @return Formatted option text
+   */
   [[nodiscard]] constexpr std::string GenerateDescription() const noexcept {
     std::string result;
     if constexpr (HasNamePropertyType<Properties...>) {
@@ -46,14 +57,33 @@ template <Property... Properties> struct Option : Properties... {
   }
 };
 
+/**
+ * @brief Deduction hint
+ *
+ * @tparam Props Property types
+ */
 template <typename... Props>
 Option(Props &&...) -> Option<std::decay_t<Props>...>;
 
+/**
+ * @brief Manual Cast to Option from \ref OptionBuilder
+ *
+ * @tparam Props Property types
+ * @param value OptionBuilder value
+ * @return Option
+ */
 template <typename... Props>
 constexpr auto CreateOption(OptionBuilder<Props...> &&value) noexcept {
   return Option<Props...>{std::move(static_cast<Props &>(value))...};
 }
 
+/**
+ * @brief Manual Cast to Option from \ref OptionBuilder
+ *
+ * @tparam Props Property types
+ * @param value OptionBuilder value
+ * @return Option
+ */
 template <typename... Props>
 constexpr auto CreateOption(OptionBuilder<Props...> value) noexcept {
   return Option<Props...>{(static_cast<Props &>(value))...};

@@ -249,6 +249,7 @@ template <typename ValueType> constexpr auto Bind(ValueType &value) noexcept {
  * @param vals variants
  */
 template <typename... ValueType>
+requires SameTypes<ValueType...>
 constexpr auto Variant(ValueType &&...vals) noexcept {
   using ReturnType = std::common_type_t<ValueType...>;
   return OptionBuilder<VariantProperty<ReturnType, sizeof...(ValueType)>>{
