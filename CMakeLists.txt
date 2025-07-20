@@ -29,7 +29,10 @@ if(OPTICA_MODULE)
            include/optica/impl/fixed_string.hpp
            include/optica/impl/properties.hpp
            include/optica/impl/option_builder.hpp
-           include/optica/impl/option.hpp)
+           include/optica/impl/option.hpp
+           include/optica/impl/token.hpp
+           include/optica/impl/parser.hpp
+           include/optica/impl/type_parsers.hpp)
 else()
   add_library(optica INTERFACE)
 
@@ -46,7 +49,10 @@ else()
               include/optica/impl/fixed_string.hpp
               include/optica/impl/properties.hpp
               include/optica/impl/option_builder.hpp
-              include/optica/impl/option.hpp)
+              include/optica/impl/option.hpp
+              include/optica/impl/token.hpp
+              include/optica/impl/parser.hpp
+              include/optica/impl/type_parsers.hpp)
 endif()
 
 add_library(optica::optica ALIAS optica)

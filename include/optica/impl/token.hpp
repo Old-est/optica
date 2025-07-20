@@ -1,12 +1,24 @@
 #pragma once
 
 #include <cstddef>
+#include <expected>
 #include <format>
 #include <print>
+#include <ranges>
 #include <string_view>
 namespace optica {
+namespace constants {
+constexpr char kSpace = ' ';
+constexpr char kComma = ',';
+constexpr char kOpenBracket = '{';
+constexpr char kCloseBracket = '}';
+constexpr char kEquals = '=';
+constexpr char kShortPrefix = '-';
+constexpr std::string_view kLongPrefix = "--";
+}  // namespace constants
 
 class TokenIterator;
+class Tokenizer;
 
 /**
  * @class Token
@@ -33,7 +45,8 @@ struct Token {
    * @param type type of a token
    */
   constexpr Token(std::string_view data, TokenType type) noexcept
-      : data_(data), type_(type),
+      : data_(data),
+        type_(type),
         token_size_(std::count_if(data_.begin(), data_.end(),
                                   [](auto symbol) { return symbol == ','; }) +
                     1) {}
@@ -71,11 +84,61 @@ struct Token {
     return token_size_;
   }
 
-private:
+  // TODO: Make doc
+  [[nodiscard]] constexpr TokenType GetTokenType() const noexcept {
+    return type_;
+  }
+
+  template <std::size_t N>
+  constexpr auto ExtractTokenUnits() const {
+    std::array<std::string_view, N> result{};
+    const char *start = data_.data();
+    const char *end = data_.data() + data_.size();
+    const char *current = start;
+    std::size_t idx = 0;
+
+    // if (token_size_ > N) {
+    //   throw "Sosal";
+    // }
+    if (N < token_size_) {
+      if consteval {
+      } else {
+        std::string res;
+        std::format_to(std::back_inserter(res),
+                       "ERROR: Extraction {} subtokens from {} sized token", N,
+                       token_size_);
+        throw std::invalid_argument(res);
+      }
+    }
+
+    while (current != end) {
+      if (*current == ' ') {
+        ++start;
+        ++current;
+        continue;
+      }
+
+      if (*current == constants::kComma) {
+        result[idx++] = std::string_view(start, current - start);
+        ++current;
+        start = current;
+      } else {
+        ++current;
+      }
+    }
+
+    if (start != end) {
+      result[idx++] = std::string_view(start, end - start);
+    }
+
+    return result;
+  }
+
+ private:
   friend std::formatter<Token>;
   friend TokenIterator;
 
-private:
+ private:
   std::string_view data_;
   TokenType type_{TokenType::None};
   std::size_t token_size_{};
@@ -84,18 +147,18 @@ private:
 constexpr std::string_view to_string(Token::TokenType type) {
   using enum Token::TokenType;
   switch (type) {
-  case None:
-    return "None";
-  case Word:
-    return "Word";
-  case LongName:
-    return "LongName";
-  case ShortName:
-    return "ShortName";
-  case CompoundName:
-    return "CompoundName";
-  default:
-    return "Unknown";
+    case None:
+      return "None";
+    case Word:
+      return "Word";
+    case LongName:
+      return "LongName";
+    case ShortName:
+      return "ShortName";
+    case CompoundName:
+      return "CompoundName";
+    default:
+      return "Unknown";
   }
 }
 
@@ -108,7 +171,7 @@ constexpr std::string_view to_string(Token::TokenType type) {
  *
  */
 class TokenIterator {
-public:
+ public:
   using value_type = Token;
   using reference = Token &;
   using pointer = Token *;
@@ -126,7 +189,7 @@ public:
    */
   constexpr TokenIterator(const char *data, const char *end) noexcept
       : current_(data), end_(end) {
-    parse_token();
+    ParseToken();
   }
 
   /**
@@ -135,7 +198,7 @@ public:
    * @return TokenIterator with new \ref Token inside
    */
   constexpr TokenIterator &operator++() noexcept {
-    parse_token();
+    ParseToken();
     return *this;
   };
   /**
@@ -162,7 +225,85 @@ public:
    */
   constexpr const Token &operator*() const noexcept { return current_token_; }
 
-private:
+ private:
+  constexpr void ParseToken() noexcept {
+    const auto *current_copy = current_;
+    auto skip_chars = [](char symbol) {
+      return symbol == constants::kSpace || symbol == constants::kComma ||
+             symbol == constants::kEquals;
+    };
+
+    current_copy = std::find_if_not(current_copy, end_, skip_chars);
+
+    if (current_copy == end_) {
+      current_token_ = Token{};
+      return;
+    }
+
+    if (current_copy == current_ &&
+        current_token_.type_ == Token::TokenType::ShortName) {
+      current_token_ =
+          Token(std::string_view(current_copy, 1), Token::TokenType::ShortName);
+      ++current_;
+      return;
+    }
+
+    auto determine_type = [](const char *start, const char *end) {
+      if (start == end) {
+        return Token::TokenType::None;
+      }
+      if (*start == constants::kOpenBracket) {
+        return Token::TokenType::CompoundName;
+      }
+      if (*start == constants::kShortPrefix and (start + 1 != end) and
+          *(start + 1) == constants::kShortPrefix) {
+        return Token::TokenType::LongName;
+      }
+      if (*start == constants::kShortPrefix) {
+        return Token::TokenType::ShortName;
+      }
+      return Token::TokenType::Word;
+    };
+
+    Token::TokenType type = determine_type(current_copy, end_);
+
+    switch (type) {
+      case Token::TokenType::LongName: {
+        const auto *start = current_copy + 2;
+        auto end = std::find_if(start, end_, [](char symbol) {
+          return symbol == constants::kComma || symbol == constants::kSpace ||
+                 symbol == constants::kEquals;
+        });
+        current_token_ = Token{std::string_view(start, end), type};
+        current_ = end;
+        return;
+      }
+      case Token::TokenType::ShortName: {
+        current_token_ =
+            Token{std::string_view(current_copy + 1, current_copy + 2), type};
+        current_ = current_copy + 2;
+        return;
+      }
+      case Token::TokenType::Word: {
+        const auto *end = std::find_if(current_copy, end_, [](char symbol) {
+          return symbol == constants::kComma || symbol == constants::kSpace ||
+                 symbol == constants::kEquals;
+        });
+        current_token_ = Token{std::string_view(current_copy, end), type};
+        current_ = end;
+        return;
+      }
+      case Token::TokenType::CompoundName: {
+        const auto *end = std::find_if(current_copy, end_, [](char symbol) {
+          return symbol == constants::kCloseBracket;
+        });
+        current_token_ = Token{std::string_view(current_copy + 1, end), type};
+        current_ = end + 1;
+        return;
+      }
+    }
+  }
+
   constexpr void parse_token() noexcept {
     // пропускаем пробелы
     auto current_copy = current_;
@@ -221,7 +362,7 @@ private:
         type);
   }
 
-private:
+ private:
   const char *current_{};
   const char *end_{};
   Token current_token_;
@@ -235,7 +376,7 @@ static_assert(std::forward_iterator<TokenIterator>, "kek");
  *
  */
 class Tokenizer {
-public:
+ public:
   /**
    * @brief Constructs Tokenizer
    *
@@ -260,15 +401,15 @@ public:
     return TokenIterator{data_string_.end(), data_string_.end()};
   }
 
-private:
+ private:
   std::string_view data_string_;
 };
+}  // namespace optica
 
-} // namespace optica
-
-template <> struct std::formatter<optica::Token> {
+template <>
+struct std::formatter<optica::Token> {
   constexpr auto parse(std::format_parse_context &ctx) {
-    return ctx.begin(); // без кастомных спецификаторов
+    return ctx.begin();  // без кастомных спецификаторов
   }
 
   template <typename FormatContext>

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "fixed_string.hpp"
 #include <concepts>
+
+#include "fixed_string.hpp"
 
 namespace optica {
 
@@ -16,7 +17,8 @@ namespace optica {
  *
  * @remark Used in CRTP style for not having N BaseProperty instances
  */
-template <typename Derived> struct BaseProperty {};
+template <typename Derived>
+struct BaseProperty {};
 
 /**
  * @concept Property
@@ -28,7 +30,8 @@ concept Property = std::derived_from<T, BaseProperty<T>>;
 /**
  * @brief Type converter for extracting Tags
  */
-template <Property Prop> using PropertyTag_t = Prop::Tag;
+template <Property Prop>
+using PropertyTag_t = Prop::Tag;
 
 /**
  * @brief Calculates number types holding speciefic PropertyTag
@@ -36,7 +39,8 @@ template <Property Prop> using PropertyTag_t = Prop::Tag;
  * @tparam Tag Selected Tag
  * @return std::size_t number types with Tag
  */
-template <typename Tag, Property... Props> consteval std::size_t CountTags() {
+template <typename Tag, Property... Props>
+consteval std::size_t CountTags() {
   return (0 + ... + std::is_same_v<Tag, PropertyTag_t<Props>>);
 }
 
@@ -65,11 +69,12 @@ struct NameProperty : BaseProperty<NameProperty<NameValue>> {
 };
 
 namespace details {
-template <typename T> struct is_name_property : std::false_type {};
+template <typename T>
+struct is_name_property : std::false_type {};
 
 template <FixedString Name>
 struct is_name_property<NameProperty<Name>> : std::true_type {};
-} // namespace details
+}  // namespace details
 
 /**
  * @concept NamePropertyType
@@ -109,15 +114,16 @@ struct ValueProperty : BaseProperty<ValueProperty<ValueType>> {
    * @return ValueType
    * @warning This function must be used only inside decltype operator
    */
-  constexpr ValueType GetValueType() noexcept;
+  constexpr ValueType GetValueType() const noexcept;
 };
 
 namespace details {
-template <typename T> struct is_value_property : std::false_type {};
+template <typename T>
+struct is_value_property : std::false_type {};
 
 template <typename T>
 struct is_value_property<ValueProperty<T>> : std::true_type {};
-} // namespace details
+}  // namespace details
 
 /**
  * @concept ValuePropertyType
@@ -200,11 +206,12 @@ struct DefaultValueProperty : BaseProperty<DefaultValueProperty<ValueType>> {
 };
 
 namespace details {
-template <typename T> struct is_default_value_type : std::false_type {};
+template <typename T>
+struct is_default_value_type : std::false_type {};
 
 template <typename T>
 struct is_default_value_type<DefaultValueProperty<T>> : std::true_type {};
-} // namespace details
+}  // namespace details
 
 /**
  * @concept DefaultValuePropertyType
@@ -231,34 +238,33 @@ struct ShortNamePropertyTag {};
  * @struct ShortNameProperty
  * @brief Represents short name property for option
  */
-struct ShortNameProperty : BaseProperty<ShortNameProperty> {
+template <FixedString ShortName>
+struct ShortNameProperty : BaseProperty<ShortNameProperty<ShortName>> {
   using Tag = ShortNamePropertyTag;
   char short_name;
-
-  /**
-   * @brief Constructs ShortName Property from string_view
-   *
-   * @param short_name string_view
-   */
-  constexpr ShortNameProperty(char short_name) noexcept
-      : short_name(short_name) {}
 
   /**
    * @brief Returns string_view on short name
    *
    * @return string_view stored short_name
    */
-  [[nodiscard]] constexpr auto GetShortName() const noexcept {
-    return short_name;
-  }
+  constexpr static auto GetShortName() noexcept { return ShortName; }
 };
+
+namespace details {
+template <typename T>
+struct is_short_name_type : std::false_type {};
+
+template <FixedString Value>
+struct is_short_name_type<ShortNameProperty<Value>> : std::true_type {};
+}  // namespace details
 
 /**
  * @concept ShortNamePropertyType
  * @brief Checks if T is ShortNameProperty
  */
 template <typename T>
-concept ShortNamePropertyType = std::is_same_v<T, ShortNameProperty>;
+concept ShortNamePropertyType = details::is_short_name_type<T>::value;
 
 /**
  * @concept HasShortNamePropertyType
@@ -298,11 +304,12 @@ struct BindProperty : BaseProperty<BindProperty<ValueType>> {
 };
 
 namespace details {
-template <typename T> struct is_bind_property : std::false_type {};
+template <typename T>
+struct is_bind_property : std::false_type {};
 
 template <typename T>
 struct is_bind_property<BindProperty<T>> : std::true_type {};
-} // namespace details
+}  // namespace details
 
 /**
  * @concept BindPropertyType
@@ -358,11 +365,12 @@ VariantProperty(Args &&...args)
     -> VariantProperty<std::common_type_t<Args...>, sizeof...(Args)>;
 
 namespace details {
-template <typename T> struct is_variant_property : std::false_type {};
+template <typename T>
+struct is_variant_property : std::false_type {};
 
 template <typename T, std::size_t N>
 struct is_variant_property<VariantProperty<T, N>> : std::true_type {};
-} // namespace details
+}  // namespace details
 
 /**
  * @concept VariantPropertyType
@@ -378,4 +386,35 @@ concept VariantPropertyType = details::is_variant_property<T>::value;
 template <typename... Ts>
 concept HasVariantPropertyType = (VariantPropertyType<Ts> || ...);
 
-} // namespace optica
+template <std::size_t N>
+struct Exact {
+  static constexpr std::size_t GetNumberArgs() noexcept { return N; }
+};
+
+using One = Exact<1>;
+using Two = Exact<2>;
+using Three = Exact<3>;
+
+struct ArityPropertyTag {};
+
+template <typename T>
+struct ArityProperty : BaseProperty<ArityProperty<T>> {
+  using Tag = ArityPropertyTag;
+  using arity_type = T;
+};
+
+namespace details {
+template <typename T>
+struct is_arity_property : std::false_type {};
+
+template <typename T>
+struct is_arity_property<ArityProperty<T>> : std::true_type {};
+}  // namespace details
+
+template <typename T>
+concept ArityPropertyType = details::is_arity_property<T>::value;
+
+template <typename... Ts>
+concept HasArityPropertyType = (ArityPropertyType<Ts> || ...);
+
+}  // namespace optica

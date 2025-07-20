@@ -1,25 +1,38 @@
 #pragma once
-#include "option_builder.hpp"
 #include <print>
 #include <string>
 
+#include "option_builder.hpp"
+#include "token.hpp"
+#include "type_parsers.hpp"
+
 namespace optica {
+enum class ResultType {
+  Ok,
+  False,
+};
+template <typename ValueType>
+struct ConsumeResult {
+  ResultType type;
+  std::size_t advance;
+  ValueType value;
+};
 
 /**
  * @struct Option
  * @brief Represents Combined sets of \ref Property
  *
  */
-template <Property... Properties> struct Option : Properties... {
+template <Property... Properties>
+struct Option : Properties... {
   /**
    * @brief Constructs Option class from Properties
    *
    * @tparam Props Properties types
    * @param props Properties
    */
-  template <typename... Props>
-  constexpr Option(Props &&...props) noexcept
-      : Properties(std::forward<Props>(props))... {}
+  constexpr Option(Properties &&...props) noexcept
+      : Properties(std::forward<Properties>(props))... {}
 
   /**
    * @brief Generates Description for option
@@ -55,6 +68,59 @@ template <Property... Properties> struct Option : Properties... {
 
     return result;
   }
+
+  auto TryConsume(TokenIterator start, TokenIterator end) const {
+    using ParsedValue = decltype(this->GetValueType());
+    using ReturnType = ConsumeResult<ParsedValue>;
+
+    auto token_type = (*start).GetTokenType();
+
+    if (token_type == Token::TokenType::Word) {
+      throw std::invalid_argument("ERROR: Currently unsupported");
+    }
+    auto token_name = (*start).GetTokenData();
+
+    if (token_type == Token::TokenType::LongName) {
+      if constexpr (HasNamePropertyType<Properties...>) {
+        if (token_name == this->GetName()) {
+          std::println("Token: {} matched with option {}", *start,
+                       static_cast<std::string>(this->GetName()));
+          return Consume(start, end);
+        }
+      } else {
+        return ReturnType{.type = ResultType::False, .advance = 0};
+      }
+    }
+
+    if (token_type == Token::TokenType::ShortName) {
+      if constexpr (HasShortNamePropertyType<Properties...>) {
+        if (token_name == this->GetShortName()) {
+          std::println("Token: {} matched with option {}", *start,
+                       static_cast<std::string>(this->GetShortName()));
+
+          return Consume(start, end);
+        }
+      } else {
+        return ReturnType{.type = ResultType::False, .advance = 0};
+      }
+    }
+
+    return ReturnType{.type = ResultType::False, .advance = 0};
+  }
+
+  // ConsumeResult Consume();
+
+  auto Consume(TokenIterator start, TokenIterator end) const {
+    using ParsedValue = decltype(this->GetValueType());
+    using ReturnType = ConsumeResult<ParsedValue>;
+
+    if constexpr (!HasArityPropertyType<Properties...> and
+                  !std::is_same_v<ParsedValue, bool>) {
+      constexpr int tokens_number = 1;
+      auto value = TypeParser<ParsedValue>::ParseValue(*(++start));
+      return ReturnType{.type = ResultType::Ok, .advance = 2, .value = value};
+    }
+  };
 };
 
 /**
@@ -89,4 +155,20 @@ constexpr auto CreateOption(OptionBuilder<Props...> value) noexcept {
   return Option<Props...>{(static_cast<Props &>(value))...};
 }
 
-} // namespace optica
+namespace details {
+template <typename T>
+struct is_option : std::false_type {};
+
+template <typename... Ts>
+struct is_option<Option<Ts...>> : std::true_type {};
+}  // namespace details
+
+/**
+ * @concept OptionType
+ *
+ * @brief Checks if T is Option
+ */
+template <typename T>
+concept OptionType = details::is_option<T>::value;
+
+}  // namespace optica

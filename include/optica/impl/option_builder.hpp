@@ -1,10 +1,12 @@
 #pragma once
-#include "properties.hpp"
 #include <utility>
+
+#include "properties.hpp"
 
 namespace optica {
 
-template <Property... Props> struct Option;
+template <Property... Props>
+struct Option;
 
 /**
  * @struct OptionBuilder
@@ -12,7 +14,9 @@ template <Property... Props> struct Option;
  * properties
  * @tparam Props Different properties
  */
-template <Property... Props> struct OptionBuilder : Props... {
+template <Property... Props>
+struct OptionBuilder : Props... {
+  using Properties = std::tuple<Props...>;
   /**
    * @brief Default constructor
    */
@@ -170,7 +174,8 @@ constexpr auto operator|(OptionBuilder<Ts...> left,
  * @tparam Name FixedString CompileTime string
  * @tparam ValueType value which holds option
  */
-template <FixedString Name, typename ValueType> constexpr auto Opt() noexcept {
+template <FixedString Name, typename ValueType>
+constexpr auto Opt() noexcept {
   return OptionBuilder<NameProperty<Name>, ValueProperty<ValueType>>{};
 }
 
@@ -186,7 +191,8 @@ constexpr auto Required() noexcept { return OptionBuilder<RequiredProperty>{}; }
  *
  * @tparam Name FixedString compiletime name
  */
-template <FixedString Name> constexpr auto Flag() noexcept {
+template <FixedString Name>
+constexpr auto Flag() noexcept {
   return OptionBuilder<NameProperty<Name>, ValueProperty<bool>>{};
 }
 
@@ -207,8 +213,9 @@ constexpr auto DefaultValue(ValueType value) noexcept {
  *
  * @param short_name short name for option
  */
-constexpr auto ShortName(char short_name) noexcept {
-  return OptionBuilder<ShortNameProperty>{ShortNameProperty{short_name}};
+template <FixedString ShortN>
+constexpr auto ShortName() noexcept {
+  return OptionBuilder<ShortNameProperty<ShortN>>{};
 }
 
 /**
@@ -238,7 +245,8 @@ constexpr auto ShortName(char short_name) noexcept {
  * // In case of non static variable you should choose non-constexpr version
  * @endcode
  */
-template <typename ValueType> constexpr auto Bind(ValueType &value) noexcept {
+template <typename ValueType>
+constexpr auto Bind(ValueType &value) noexcept {
   return OptionBuilder<BindProperty<ValueType>>{BindProperty<ValueType>{value}};
 }
 
@@ -249,7 +257,7 @@ template <typename ValueType> constexpr auto Bind(ValueType &value) noexcept {
  * @param vals variants
  */
 template <typename... ValueType>
-requires SameTypes<ValueType...>
+  requires SameTypes<ValueType...>
 constexpr auto Variant(ValueType &&...vals) noexcept {
   using ReturnType = std::common_type_t<ValueType...>;
   return OptionBuilder<VariantProperty<ReturnType, sizeof...(ValueType)>>{
@@ -257,4 +265,9 @@ constexpr auto Variant(ValueType &&...vals) noexcept {
           std::forward<ValueType>(vals)...}};
 }
 
-} // namespace optica
+template <typename ArityType>
+constexpr auto Arity() noexcept {
+  return OptionBuilder<ArityProperty<ArityType>>{};
+}
+
+}  // namespace optica
