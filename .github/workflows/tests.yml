@@ -16,12 +16,12 @@ jobs:
         run: |
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
           sudo apt-get update
-          sudo apt-get install -y g++-14 cmake ninja-build
+          sudo apt-get install -y g++-15 cmake ninja-build
 
       - name: Set GCC 14 as default
         run: |
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 \
-                                   --slave /usr/bin/gcc gcc /usr/bin/gcc-14
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100 \
+                                   --slave /usr/bin/gcc gcc /usr/bin/gcc-15
           g++ --version  # проверить
 
       - name: Configure CMake
