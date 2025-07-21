@@ -1,37 +1,43 @@
 #pragma once
 
 #include <charconv>
-#include <string_view>
+
+#include "token.hpp"
 namespace optica {
+template <typename Type>
+struct TypeParser;
 
-/**
- * @brief Parsing function for std::string_view
- *
- * @tparam T Type into string should be parsed
- * @param data Actual std::string_view with data
- * @return bool that shows is parsing successful
- */
-template <typename T> constexpr bool ParseType(std::string_view data, T &) {
-  static_assert(sizeof(T) == 0, "No try_parse specialization for this type T");
-  return false;
-}
-
-/**
- * @brief Specialization for parsing int values
- *
- * @param data Actual std::string_view data
- * @param res Output result
- * @return bool in case if parsing isn't successful
- * \showinlinesource
- */
-template <> constexpr bool ParseType<int>(std::string_view data, int &res) {
-  int val{};
-  auto [ptr, ec] = std::from_chars(data.data(), data.data() + data.size(), val);
-  if (std::errc() == ec) {
-    res = val;
-    return true;
+template <>
+struct TypeParser<int> {
+  static int ParseValue(const Token& token) {
+    int val{};
+    auto [ptr, ec] = std::from_chars(token.GetTokenData().data(),
+                                     token.GetTokenData().end(), val);
+    return val;
   }
-  return false;
-}
+};
 
-} // namespace optica
+template <>
+struct TypeParser<double> {
+  static double ParseValue(const Token& token) {
+    double val{};
+    auto [ptr, ec] = std::from_chars(token.GetTokenData().data(),
+                                     token.GetTokenData().end(), val);
+    return val;
+  }
+};
+
+template <>
+struct TypeParser<std::string> {
+  static std::string ParseValue(const Token& token) {
+    return std::string(token.GetTokenData());
+  }
+};
+
+template <typename T, std::size_t N>
+struct TypeParser<std::array<T, N>> {
+  static T ParseValue(const Token& token) {
+    return TypeParser<T>::ParseValue(token);
+  }
+};
+}  // namespace optica
