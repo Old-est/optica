@@ -24,6 +24,7 @@ jobs:
 
       - name: Prepare git repository for diff
         run: |
+          git config --global --add safe.directory $GITHUB_WORKSPACE
           git init
           git remote add origin https://github.com/${{ github.repository }}
           git fetch origin ${{ github.sha }}
