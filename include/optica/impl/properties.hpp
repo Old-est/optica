@@ -391,6 +391,17 @@ struct Exact {
   static constexpr std::size_t GetNumberArgs() noexcept { return N; }
 };
 
+namespace details {
+template <typename T>
+struct is_exact_arity : std::false_type {};
+
+template <std::size_t N>
+struct is_exact_arity<Exact<N>> : std::true_type {};
+}  // namespace details
+
+template <typename T>
+concept ExactArity = details::is_exact_arity<T>::value;
+
 using One = Exact<1>;
 using Two = Exact<2>;
 using Three = Exact<3>;
@@ -401,6 +412,8 @@ template <typename T>
 struct ArityProperty : BaseProperty<ArityProperty<T>> {
   using Tag = ArityPropertyTag;
   using arity_type = T;
+
+  constexpr static arity_type GetArityType() noexcept;
 };
 
 namespace details {

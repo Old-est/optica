@@ -108,8 +108,6 @@ struct Option : Properties... {
     return ReturnType{.type = ResultType::False, .advance = 0};
   }
 
-  // ConsumeResult Consume();
-
   auto Consume(TokenIterator start, TokenIterator end) const {
     using ParsedValue = decltype(this->GetValueType());
     using ReturnType = ConsumeResult<ParsedValue>;
@@ -120,7 +118,20 @@ struct Option : Properties... {
       auto value = TypeParser<ParsedValue>::ParseValue(*(++start));
       return ReturnType{.type = ResultType::Ok, .advance = 2, .value = value};
     }
-  };
+    if constexpr (HasArityPropertyType<Properties...>) {
+      using ArityType = decltype(this->GetArityType());
+      if constexpr (ExactArity<ArityType>) {
+        constexpr std::size_t size = ArityType::GetNumberArgs();
+        ParsedValue res;
+        for (std::size_t i = 0; i < size; ++i) {
+          res[i] = TypeParser<ParsedValue>::ParseValue(*(++start));
+          std::println("My Arity is {}", ArityType::GetNumberArgs());
+        }
+        return ReturnType{
+            .type = ResultType::Ok, .advance = size + 1, .value = res};
+      }
+    };
+  }
 };
 
 /**

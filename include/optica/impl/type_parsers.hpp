@@ -33,4 +33,11 @@ struct TypeParser<std::string> {
     return std::string(token.GetTokenData());
   }
 };
+
+template <typename T, std::size_t N>
+struct TypeParser<std::array<T, N>> {
+  static T ParseValue(const Token& token) {
+    return TypeParser<T>::ParseValue(token);
+  }
+};
 }  // namespace optica

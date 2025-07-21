@@ -91,7 +91,7 @@ struct Token {
 
   template <std::size_t N>
   constexpr auto ExtractTokenUnits() const {
-    std::array<std::string_view, N> result{};
+    std::array<Token, N> result{};
     const char *start = data_.data();
     const char *end = data_.data() + data_.size();
     const char *current = start;
@@ -119,7 +119,8 @@ struct Token {
       }
 
       if (*current == constants::kComma) {
-        result[idx++] = std::string_view(start, current - start);
+        result[idx++] =
+            Token(std::string_view(start, current - start), TokenType::Word);
         ++current;
         start = current;
       } else {
@@ -128,7 +129,8 @@ struct Token {
     }
 
     if (start != end) {
-      result[idx++] = std::string_view(start, end - start);
+      result[idx++] =
+          Token(std::string_view(start, end - start), TokenType::Word);
     }
 
     return result;
