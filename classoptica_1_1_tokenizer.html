@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8"/>
-  <title>optica::FixedString class | optica</title>
+  <title>optica::Tokenizer class | optica</title>
   <link href="favicon-dark.png" rel="icon" type="image/png"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <meta content="#22272e" name="theme-color"/>
@@ -34,7 +34,7 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="annotated.html">Classes</a></li>
-            <li class="poxy-navbar-version-selector"><a href="structoptica_1_1_fixed_string.html">Version: HEAD</a><ol><li><a href="structoptica_1_1_fixed_string.html">HEAD</a></li></ol></li>
+            <li class="poxy-navbar-version-selector"><a href="classoptica_1_1_tokenizer.html">Version: HEAD</a><ol><li><a href="classoptica_1_1_tokenizer.html">HEAD</a></li></ol></li>
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a class="poxy-icon repo github poxy-external" href="https://github.com/Old-est/optica" target="_blank" title="View on GitHub"><svg id="poxy-icon-repo" version="1.1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25,1.23a24.37,24.37,0,0,0-7.7,47.5C18.51,49,19,48.2,19,47.56s0-2.12,0-4.15c-6.78,1.47-8.21-3.27-8.21-3.27C9.61,37.33,8,36.58,8,36.58c-2.21-1.51.17-1.48.17-1.48a5.12,5.12,0,0,1,3.73,2.51c2.17,3.72,5.7,2.65,7.09,2a5.25,5.25,0,0,1,1.55-3.26c-5.41-.61-11.1-2.7-11.1-12A9.41,9.41,0,0,1,12,17.79a8.75,8.75,0,0,1,.24-6.45s2-.66,6.7,2.49a23.1,23.1,0,0,1,12.2,0c4.66-3.15,6.7-2.49,6.7-2.49A8.75,8.75,0,0,1,38,17.79a9.41,9.41,0,0,1,2.51,6.54c0,9.36-5.7,11.42-11.13,12a5.83,5.83,0,0,1,1.65,4.51c0,3.26,0,5.89,0,6.69,0,.65.44,1.41,1.68,1.17A24.38,24.38,0,0,0,25,1.23Z" fill="currentColor"></path></svg></a></li>
@@ -53,21 +53,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceoptica.html">optica</a>::<wbr/></span>FixedString <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespaceoptica.html">optica</a>::<wbr/></span>Tokenizer <span class="m-thin">class</span>
         </h1>
-        <p>Represents compile time string.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">N</td>
-              <td>(length of the string)</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Class that creates Tokenized context.</p>
         <nav class="m-block m-default poxy-toc" id="poxy-toc">
           <h3>Contents</h3>
           <ul>
@@ -79,107 +67,70 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>Used as NTTP for naming options</p></aside>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a16cde23ece67af8500c5a4842a368092">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">char</a>(&amp;str)[N+1]) →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#af7f10737c61d5f3d15bc7de369d51881">Tokenizer</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data) →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Constructs fixed size string from string literal.</dd>
+            <dd>Constructs <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#aef4a758e8b5a83d511cb01782ed646e8">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/container/array.html" target="_blank">std::<wbr/>array</a>&lt;<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">char</a>, <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">N</a>&gt; str) →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a5a90766100cd48c32dc022d07bd1ae96">begin</a>(</span><span class="m-doc-wrap">) const →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Constructs fixed size string from array of chars.</dd>
-            <dt id="a838f03fb0b22f385cb3e93e58c08a7c5">
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc-self" href="#a838f03fb0b22f385cb3e93e58c08a7c5">operator std::string</a>(</span><span class="m-doc-wrap">) const →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Converts Fixed string into general string.</dd>
-            <dt id="a11ef25bf43bc826255319c0c297d5495">
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc-self" href="#a11ef25bf43bc826255319c0c297d5495">operator std::string_view</a>(</span><span class="m-doc-wrap">) const →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd>Converts fixed string into string_view.</dd>
+            <dd>Get <a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> that holds first <a class="m-doc" href="structoptica_1_1_token.html">Token</a>.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> U</span></span>&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#adbace514494cfcb4355f2462a65a22ab">operator==</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a>&lt;<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">U</a>&gt;&amp; other) const →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
-					<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">bool</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a92618bce6b7ee682e088d1fa3437af33">end</a>(</span><span class="m-doc-wrap">) const →  <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Checks if 2 strings are equal.</dd>
+            <dd>Get End of <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a>.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a16cde23ece67af8500c5a4842a368092"><div>
+          <section class="m-doc-details" id="af7f10737c61d5f3d15bc7de369d51881"><div>
             <h3>
-              <div class="m-doc-template">
-                <span class="m-doc-template-parent">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</span>
-              </div>
-              <span class="m-doc-wrap-bumper"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-doc-details-prefix">optica::FixedString::</span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a16cde23ece67af8500c5a4842a368092">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">char</a>(&amp;str)[N+1]) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-doc-details-prefix">optica::<wbr/>Tokenizer::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#af7f10737c61d5f3d15bc7de369d51881">Tokenizer</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Constructs fixed size string from string literal.</p>
+            <p>Constructs <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">str</td>
-                  <td>Actual string literal</td>
+                  <td style="width: 1%">data</td>
+                  <td><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> with sequence of chars</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aef4a758e8b5a83d511cb01782ed646e8"><div>
+          <section class="m-doc-details" id="a5a90766100cd48c32dc022d07bd1ae96"><div>
             <h3>
-              <div class="m-doc-template">
-                <span class="m-doc-template-parent">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</span>
-              </div>
-              <span class="m-doc-wrap-bumper"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a> <span class="m-doc-details-prefix">optica::FixedString::</span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#aef4a758e8b5a83d511cb01782ed646e8">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/container/array.html" target="_blank">std::<wbr/>array</a>&lt;<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">char</a>, <a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">N</a>&gt; str) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
-            </h3>
-            <p>Constructs fixed size string from array of chars.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">str</td>
-                  <td>Array of chars</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="adbace514494cfcb4355f2462a65a22ab"><div>
-            <h3>
-              <div class="m-doc-template">
-                <span class="m-doc-template-parent">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</span>
-                <br/>
-                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> U</span></span>&gt;
-              </div>
               <span class="m-doc-wrap-bumper"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
-					<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">bool</a> <span class="m-doc-details-prefix">optica::FixedString::</span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#adbace514494cfcb4355f2462a65a22ab">operator==</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">const</a>
-						<a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a>&lt;<a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">U</a>&gt;&amp; other) const <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+					<a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> <span class="m-doc-details-prefix">optica::<wbr/>Tokenizer::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a5a90766100cd48c32dc022d07bd1ae96">begin</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Checks if 2 strings are equal.</p>
+            <p>Get <a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> that holds first <a class="m-doc" href="structoptica_1_1_token.html">Token</a>.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">other</td>
-                  <td>Other string may be with different size</td>
-                </tr>
-              </tbody>
               <tfoot>
                 <tr>
-                  <th>Returns</th>
-                  <td>bool</td>
+                  <th style="width: 1%">Returns</th>
+                  <td><a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> with first token</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a92618bce6b7ee682e088d1fa3437af33"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="namespaceoptica.html#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> <span class="m-doc-details-prefix">optica::<wbr/>Tokenizer::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a92618bce6b7ee682e088d1fa3437af33">end</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Get End of <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Sentinel</td>
                 </tr>
               </tfoot>
             </table>

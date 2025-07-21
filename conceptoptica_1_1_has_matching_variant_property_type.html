@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="utf-8"/>
-  <title>optica::IsTypedArity concept | optica</title>
+  <title>optica::HasMatchingVariantPropertyType concept | optica</title>
   <link href="favicon-dark.png" rel="icon" type="image/png"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <meta content="#22272e" name="theme-color"/>
@@ -34,7 +34,7 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="annotated.html">Classes</a></li>
-            <li class="poxy-navbar-version-selector"><a href="conceptoptica_1_1_is_typed_arity.html">Version: HEAD</a><ol><li><a href="conceptoptica_1_1_is_typed_arity.html">HEAD</a></li></ol></li>
+            <li class="poxy-navbar-version-selector"><a href="conceptoptica_1_1_has_matching_variant_property_type.html">Version: HEAD</a><ol><li><a href="conceptoptica_1_1_has_matching_variant_property_type.html">HEAD</a></li></ol></li>
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a class="poxy-icon repo github poxy-external" href="https://github.com/Old-est/optica" target="_blank" title="View on GitHub"><svg id="poxy-icon-repo" version="1.1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25,1.23a24.37,24.37,0,0,0-7.7,47.5C18.51,49,19,48.2,19,47.56s0-2.12,0-4.15c-6.78,1.47-8.21-3.27-8.21-3.27C9.61,37.33,8,36.58,8,36.58c-2.21-1.51.17-1.48.17-1.48a5.12,5.12,0,0,1,3.73,2.51c2.17,3.72,5.7,2.65,7.09,2a5.25,5.25,0,0,1,1.55-3.26c-5.41-.61-11.1-2.7-11.1-12A9.41,9.41,0,0,1,12,17.79a8.75,8.75,0,0,1,.24-6.45s2-.66,6.7,2.49a23.1,23.1,0,0,1,12.2,0c4.66-3.15,6.7-2.49,6.7-2.49A8.75,8.75,0,0,1,38,17.79a9.41,9.41,0,0,1,2.51,6.54c0,9.36-5.7,11.42-11.13,12a5.83,5.83,0,0,1,1.65,4.51c0,3.26,0,5.89,0,6.69,0,.65.44,1.41,1.68,1.17A24.38,24.38,0,0,0,25,1.23Z" fill="currentColor"></path></svg></a></li>
@@ -53,21 +53,17 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceoptica.html">optica</a>::<wbr/></span>IsTypedArity <span class="m-thin">concept</span>
+          <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+          <span class="m-breadcrumb"><a href="namespaceoptica.html">optica</a>::<wbr/></span>HasMatchingVariantPropertyType <span class="m-thin">concept</span>
         </h1>
-        <p>Concept determining is Arity one of not numeric.</p>
-        <table class="m-table m-fullwidth m-flat">
-          <thead>
-            <tr><th colspan="2">Template parameters</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="width: 1%">T</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Checks if set of the Properties has VariantProperty and if it has checks equality holding ValueType and VariantProperty Type.</p>
+<pre class="m-code"><span class="c1">// This is valid because holding value is type of int and variant types are</span>
+<span class="k">int</span> <span class="n">too</span> <span class="k">auto</span> <span class="n">option</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Opt</span><span class="o">&lt;</span><span class="s">"Day"</span><span class="p">,</span> <span class="k">int</span><span class="o">&gt;</span> <span class="o">|</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Variant</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
+<span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+
+<span class="c1">// This is invalid because variant type are string literal</span>
+<span class="k">auto</span> <span class="n">option</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Opt</span><span class="o">&lt;</span><span class="s">"Day"</span><span class="p">,</span> <span class="k">int</span><span class="o">&gt;</span> <span class="o">|</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Variant</span><span class="p">(</span><span class="s">"Mon"</span><span class="p">,</span> <span class="s">"Tue"</span><span class="p">,</span> <span class="s">"Wed"</span><span class="p">,</span>
+<span class="s">"Thu"</span><span class="p">,</span> <span class="s">"Fri"</span><span class="p">,</span> <span class="s">"Sat"</span><span class="p">,</span> <span class="s">"Sun"</span><span class="p">);</span></pre>
       </div>
     </div>
   </div>

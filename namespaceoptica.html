@@ -55,7 +55,7 @@
         <h1>
           optica <span class="m-thin">namespace</span>
         </h1>
-        <p>The root namespace for all optica functions and types.</p>
+        <p>Core namespace of the library.</p>
         <nav class="m-block m-default poxy-toc" id="poxy-toc">
           <h3>Contents</h3>
           <ul>
@@ -64,6 +64,7 @@
               <ul>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#nested-concepts">Concepts</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
@@ -73,97 +74,321 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">Arity Value</span></span>&gt;</div>
-              class <a class="m-doc" href="structoptica_1_1_arity_property.html">ArityProperty</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">typename</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">Derived</a></span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_base_property.html">BaseProperty</a>
             </dt>
-            <dd>Represents Arity property (Possible number of arguments)</dd>
+            <dd>Represents family of properties.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> Size</span></span>&gt;</div>
-              class <a class="m-doc" href="structoptica_1_1_exact.html">Exact</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">typename</a> ValueType</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a>
             </dt>
-            <dd>Represents option takes exact number.</dd>
+            <dd>Represents <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a>.</dd>
+            <dt>
+              class <a class="m-doc" href="structoptica_1_1_bind_property_tag.html">BindPropertyTag</a>
+            </dt>
+            <dd>Tag for <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">typename</a> ValueType</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_default_value_property.html">DefaultValueProperty</a>
+            </dt>
+            <dd>Represents <a class="m-doc" href="structoptica_1_1_default_value_property.html">DefaultValueProperty</a>.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</div>
-              struct <a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a>
+              class <a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a>
             </dt>
-            <dd>Compiletime friendly fixed size string used as NTTP.</dd>
+            <dd>Represents compile time string.</dd>
             <dt>
-              class <a class="m-doc" href="structoptica_1_1_one_or_more.html">OneOrMore</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> NameValue</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_name_property.html">NameProperty</a>
             </dt>
-            <dd>Represents option takes at least one argument.</dd>
+            <dd>Property holds name set by template parameter.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename Derived</span></span>&gt;</div>
-              class <a class="m-doc" href="structoptica_1_1_property_base.html">PropertyBase</a>
+              class <a class="m-doc" href="structoptica_1_1_name_property_tag.html">NamePropertyTag</a>
             </dt>
-            <dd>Base class for any kind CMD option.</dd>
+            <dd>Tag for <a class="m-doc" href="structoptica_1_1_name_property.html">NameProperty</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">Property... Properties</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_option.html">Option</a>
+            </dt>
+            <dd>Represents Combined sets of Property.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">Property... Props</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>
+            </dt>
+            <dd>Struct that provide abillity to store and accumulate different properties.</dd>
+            <dt>
+              struct <a class="m-doc" href="structoptica_1_1_required_property.html">RequiredProperty</a>
+            </dt>
+            <dd>Property tels is required value or not.</dd>
+            <dt>
+              class <a class="m-doc" href="structoptica_1_1_required_property_tag.html">RequiredPropertyTag</a>
+            </dt>
+            <dd>Tag for <a class="m-doc" href="structoptica_1_1_required_property.html">RequiredProperty</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> ShortName</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_short_name_property.html">ShortNameProperty</a>
+            </dt>
+            <dd>Represents short name property for option.</dd>
+            <dt>
+              class <a class="m-doc" href="structoptica_1_1_token.html">Token</a>
+            </dt>
+            <dd>This class represents token extracted from string.</dd>
+            <dt>
+              class <a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a>
+            </dt>
+            <dd><a class="m-doc poxy-injected poxy-external poxy-cppreference poxy-named-requirement" href="https://en.cppreference.com/w/cpp/named_req/Iterator" target="_blank">Iterator</a> on string_view.</dd>
+            <dt>
+              class <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a>
+            </dt>
+            <dd>Class that creates Tokenized context.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">typename</a> ValueType</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_value_property.html">ValueProperty</a>
+            </dt>
+            <dd>Proprty holds ValueType.</dd>
+            <dt>
+              class <a class="m-doc" href="structoptica_1_1_value_property_tag.html">ValuePropertyTag</a>
+            </dt>
+            <dd>Tag for <a class="m-doc" href="structoptica_1_1_value_property.html">ValueProperty</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">typename</a> ValueType</span>, <span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</div>
+              struct <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a>
+            </dt>
+            <dd>Represents <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a>.</dd>
           </dl>
         </section>
         <section id="nested-concepts">
           <h2><a href="#nested-concepts">Concepts</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_is_numeric_arity.html">IsNumericArity</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_variant_property_type.html">HasVariantPropertyType</a>
             </dt>
-            <dd>Concept determining is Arity numeric.</dd>
+            <dd>Checks if parameters pack contains VariantProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_default_value_property_type.html">HasDefaultValuePropertyType</a>
+            </dt>
+            <dd>Checks if parameters pack contains DefaultValueProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_valid_order_expression.html">ValidOrderExpression</a>
+            </dt>
+            <dd>Checks if Option expression starts with Opt.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_bind_property_type.html">BindPropertyType</a>
+            </dt>
+            <dd>Checks if T is BindProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_option_type.html">OptionType</a>
+            </dt>
+            <dd>Checks if T is Option.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_short_name_property_type.html">ShortNamePropertyType</a>
+            </dt>
+            <dd>Checks if T is ShortNameProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_variant_property_type.html">VariantPropertyType</a>
+            </dt>
+            <dd>Checks if type T is VariantProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_value_property_type.html">ValuePropertyType</a>
+            </dt>
+            <dd>Checks if type is ValueProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_required_peoperty_type.html">HasRequiredPeopertyType</a>
+            </dt>
+            <dd>Checks if parameters pack contains RequiredProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_unique_properties.html">UniqueProperties</a>
+            </dt>
+            <dd>Checks if all properties are unique.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_name_property_type.html">NamePropertyType</a>
+            </dt>
+            <dd>Checks if type is NameProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_variant_property_type.html">HasMatchingVariantPropertyType</a>
+            </dt>
+            <dd>Checks if set of the Properties has VariantProperty and if it has checks equality holding ValueType and VariantProperty Type.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_short_name_property_type.html">HasShortNamePropertyType</a>
+            </dt>
+            <dd>Checks if parameters pack contains ShortNameProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_required_property_type.html">RequiredPropertyType</a>
+            </dt>
+            <dd>Checks if type is RequiredProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_value_property_type.html">HasValuePropertyType</a>
+            </dt>
+            <dd>Checks if parameters pack contains ValueProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_property.html">Property</a>
             </dt>
-            <dd>Concept for determining is T Property or not.</dd>
+            <dd>Checks if a type is property type.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_matching_default_and_value_types.html">MatchingDefaultAndValueTypes</a>
+            </dt>
+            <dd>Checks if Holding ValueType and DefaultValueType are same.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_valid_property_expression.html">ValidPropertyExpression</a>
+            </dt>
+            <dd>Cchecks if Property expression is valid.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_default_value_type.html">HasMatchingDefaultValueType</a>
+            </dt>
+            <dd>Checks if set of Properties has DefaultValueProperty and are it same as Holding ValueType.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_is_typed_arity.html">IsTypedArity</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_default_value_property_type.html">DefaultValuePropertyType</a>
             </dt>
-            <dd>Concept determining is Arity one of not numeric.</dd>
+            <dd>Checks if T is DefaultValueProperty.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_is_arity_property.html">IsArityProperty</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_bind_property_type.html">HasBindPropertyType</a>
             </dt>
-            <dd>IsArityOrNot.</dd>
+            <dd>Checks if parameters pack contains BindProperty.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_arity.html">Arity</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_matching_variant_and_value_types.html">MatchingVariantAndValueTypes</a>
             </dt>
-            <dd>Concept for any related to Arguments type.</dd>
+            <dd>Checks if Holding ValueType and VariantProperty type are same.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_name_property_type.html">HasNamePropertyType</a>
+            </dt>
+            <dd>Checks if parameters pack contains NameProperty.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt id="a7af6352ab79e9f068a6050a83cffb516">
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">Property Prop</span></span>&gt;</div>
+              using <a class="m-doc-self" href="#a7af6352ab79e9f068a6050a83cffb516">PropertyTag_t</a> = Prop::Tag
+            </dt>
+            <dd>Type converter for extracting Tags.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a0c335c6c57d9af478c3c4247e01da80e">ParseType</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
-              T&amp;) →  bool <span class="m-label m-flat m-primary">constexpr</span></span>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename ValueType</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a1e8496b24fceadb14704f3175b84c7e6">Bind</a>(</span><span class="m-doc-wrap">ValueType&amp; value) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Parsing function for <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a>.</dd>
+            <dd>Sets <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a> for option.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#ac3181a5661e573da2c9ca34e6094058a">ParseType&lt;int&gt;</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
-              int&amp; res) →  bool <span class="m-label m-flat m-primary">constexpr</span></span>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename Tag</span>, <span class="m-doc-template-param">Property... Props</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a1b8f8074524cddfb93dcca69c1698133">CountTags</a>(</span><span class="m-doc-wrap">) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">consteval</a>
+					<a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a></span>
             </dt>
-            <dd>Specialization for parsing int values.</dd>
+            <dd>Calculates number types holding speciefic PropertyTag.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a7bc9bd57dde7eb1f89230a1beebb5766">CreateOption</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Props...&gt;&amp;&amp; value) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Manual Cast to <a class="m-doc" href="structoptica_1_1_option.html">Option</a> from <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a03f7a9e8be11ecdffb6fbf9cb6b15017">CreateOption</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Props...&gt; value) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Manual Cast to <a class="m-doc" href="structoptica_1_1_option.html">Option</a> from <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename ValueType</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#af4eaf0445aabea9c6cac25251c46a326">DefaultValue</a>(</span><span class="m-doc-wrap">ValueType value) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Sets Default value for option.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a3ee7143b88b9ea9fbbbe6bdc5b908046">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">const</a>
+						<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">char</a>(&amp;str)[N]) →  FixedString&lt; N - 1 &gt;</span>
+            </dt>
+            <dd>Deduction hint.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">FixedString Name</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a705283c43e4a86ca01176e888b481322">Flag</a>(</span><span class="m-doc-wrap">) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Creates Flag option.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">FixedString Name</span>, <span class="m-doc-template-param">typename ValueType</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#ab418af7017abfe9412d0d2f97a42e607">Opt</a>(</span><span class="m-doc-wrap">) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Creates <a class="m-doc" href="structoptica_1_1_option.html">Option</a> with Name and ValueType.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#ae8ec40df32e2de4267719d0f81d2909f">Option</a>(</span><span class="m-doc-wrap">Props&amp;&amp; ...) →  Option&lt; std::decay_t&lt; Props &gt;... &gt;</span>
+            </dt>
+            <dd>Deduction hint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a1e2a56aec22b15876ce9a44aaf7a9997">Required</a>(</span><span class="m-doc-wrap">) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Sets Required Flag.</dd>
+            <dt id="a4603775509f679b394615530899a560e">
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">FixedString ShortN</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc-self" href="#a4603775509f679b394615530899a560e">ShortName</a>(</span><span class="m-doc-wrap">) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Sets ShortName for option.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... ValueType</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a303a9462ba2373e47b88e235b54b0718">Variant</a>(</span><span class="m-doc-wrap">ValueType &amp;&amp; ... vals) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Sets <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a> for option.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span>, <span class="m-doc-template-param">typename... Us</span></span>&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a class="m-doc" href="#a3768480015f3a20beda4dd36915a8fce">operator|</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Ts...&gt; left,
+              <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Us...&gt; right) →  <a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Pipe operator for accumulating properties.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a0c335c6c57d9af478c3c4247e01da80e"><div>
+          <section class="m-doc-details" id="a1e8496b24fceadb14704f3175b84c7e6"><div>
             <h3>
               <div class="m-doc-template">
-                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename ValueType</span></span>&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a0c335c6c57d9af478c3c4247e01da80e">ParseType</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
-              T&amp;) <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a1e8496b24fceadb14704f3175b84c7e6">Bind</a>(</span><span class="m-doc-wrap">ValueType&amp; value) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Parsing function for <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a>.</p>
+            <p>Sets <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a> for option.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Type into string should be parsed</td>
+                  <td style="width: 1%">ValueType</td>
+                  <td>Type of holding bind</td>
                 </tr>
               </tbody>
               <thead>
@@ -171,48 +396,341 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>data</td>
-                  <td>Actual <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> with data</td>
+                  <td>value</td>
+                  <td>Value binded</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>You cant create constexpr <a class="m-doc" href="structoptica_1_1_option.html">Option</a> if your value isn't constexpr available. In this case create non-constexpr option or don't use <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a></p></aside><pre class="m-code"><span class="k">static</span> <span class="k">double</span> <span class="n">speed</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">option</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Option</span><span class="o">&lt;</span><span class="s">"speed"</span><span class="p">,</span> <span class="k">double</span><span class="o">&gt;</span> <span class="o">|</span>
+<span class="nn">optica</span><span class="o">::</span><span class="nf">Bind</span><span class="p">(</span><span class="n">speed</span><span class="p">);</span>
+
+<span class="c1">// In this case it's okey because taking ref or pointer to static variable</span>
+<span class="c1">// is possible in constexpr context</span>
+
+<span class="k">double</span> <span class="n">height</span><span class="p">{};</span>
+
+<span class="k">auto</span> <span class="n">option_height</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Option</span><span class="o">&lt;</span><span class="s">"height"</span><span class="p">,</span> <span class="k">double</span><span class="o">&gt;</span> <span class="o">|</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Bind</span><span class="p">(</span><span class="n">height</span><span class="p">);</span>
+
+<span class="c1">// In case of non static variable you should choose non-constexpr version</span></pre>
+          </div></section>
+          <section class="m-doc-details" id="a1b8f8074524cddfb93dcca69c1698133"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename Tag</span>, <span class="m-doc-template-param">Property... Props</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">consteval</a>
+					<a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a1b8f8074524cddfb93dcca69c1698133">CountTags</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Calculates number types holding speciefic PropertyTag.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Tag</td>
+                  <td>Selected Tag</td>
+                </tr>
+                <tr>
+                  <td>Props</td>
+                  <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>bool that shows is parsing successful</td>
+                  <td><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> number types with Tag</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac3181a5661e573da2c9ca34e6094058a"><div>
+          <section class="m-doc-details" id="a7bc9bd57dde7eb1f89230a1beebb5766"><div>
             <h3>
               <div class="m-doc-template">
-                template &lt;&gt;
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#ac3181a5661e573da2c9ca34e6094058a">ParseType&lt;int&gt;</a>(</span><span class="m-doc-wrap"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data,
-              int&amp; res) <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a7bc9bd57dde7eb1f89230a1beebb5766">CreateOption</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Props...&gt;&amp;&amp; value) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Specialization for parsing int values.</p>
+            <p>Manual Cast to <a class="m-doc" href="structoptica_1_1_option.html">Option</a> from <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Props</td>
+                  <td>Property types</td>
+                </tr>
+              </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">data</td>
-                  <td>Actual <a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/string/basic_string_view.html" target="_blank">std::<wbr/>string_view</a> data</td>
-                </tr>
-                <tr>
-                  <td>res</td>
-                  <td>Output result</td>
+                  <td>value</td>
+                  <td><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a> value</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>bool in case if parsing isn't successful \showinlinesource</td>
+                  <td><a class="m-doc" href="structoptica_1_1_option.html">Option</a></td>
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a03f7a9e8be11ecdffb6fbf9cb6b15017"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a03f7a9e8be11ecdffb6fbf9cb6b15017">CreateOption</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Props...&gt; value) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Manual Cast to <a class="m-doc" href="structoptica_1_1_option.html">Option</a> from <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Props</td>
+                  <td>Property types</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a> value</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a class="m-doc" href="structoptica_1_1_option.html">Option</a></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af4eaf0445aabea9c6cac25251c46a326"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename ValueType</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#af4eaf0445aabea9c6cac25251c46a326">DefaultValue</a>(</span><span class="m-doc-wrap">ValueType value) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Sets Default value for option.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ValueType</td>
+                  <td>type of the default value</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>default value itself</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3ee7143b88b9ea9fbbbe6bdc5b908046"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param"><a class="m-doc-external poxy-cppreference poxy-external" href="http://en.cppreference.com/w/cpp/types/size_t.html" target="_blank">std::<wbr/>size_t</a> N</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a3ee7143b88b9ea9fbbbe6bdc5b908046">FixedString</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">const</a>
+						<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">char</a>(&amp;str)[N]) →  FixedString&lt; N - 1 &gt;</span></span>
+            </h3>
+            <p>Deduction hint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">N</td>
+                  <td>size of string literal with trailing \0</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>str</td>
+                  <td>Actual string literal</td>
+                </tr>
+              </tbody>
+            </table>
+<p>It allows to deduce the right type of the <a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> without trailing \0 code in c++ string literals</p>
+          </div></section>
+          <section class="m-doc-details" id="a705283c43e4a86ca01176e888b481322"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">FixedString Name</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a705283c43e4a86ca01176e888b481322">Flag</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Creates Flag option.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Name</td>
+                  <td><a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> compiletime name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab418af7017abfe9412d0d2f97a42e607"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">FixedString Name</span>, <span class="m-doc-template-param">typename ValueType</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#ab418af7017abfe9412d0d2f97a42e607">Opt</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Creates <a class="m-doc" href="structoptica_1_1_option.html">Option</a> with Name and ValueType.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Name</td>
+                  <td><a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> CompileTime string</td>
+                </tr>
+                <tr>
+                  <td>ValueType</td>
+                  <td>value which holds option</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8ec40df32e2de4267719d0f81d2909f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Props</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#ae8ec40df32e2de4267719d0f81d2909f">Option</a>(</span><span class="m-doc-wrap">Props&amp;&amp; ...) →  Option&lt; std::decay_t&lt; Props &gt;... &gt;</span></span>
+            </h3>
+            <p>Deduction hint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Props</td>
+                  <td>Property types</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1e2a56aec22b15876ce9a44aaf7a9997"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a1e2a56aec22b15876ce9a44aaf7a9997">Required</a>(</span><span class="m-doc-wrap">) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Sets Required Flag.</p>
+<p>If not provided in chain of pipe operators means no required</p>
+          </div></section>
+          <section class="m-doc-details" id="a303a9462ba2373e47b88e235b54b0718"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... ValueType</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a303a9462ba2373e47b88e235b54b0718">Variant</a>(</span><span class="m-doc-wrap">ValueType &amp;&amp; ... vals) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Sets <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a> for option.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ValueType</td>
+                  <td>type of variants</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>vals</td>
+                  <td>variants</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3768480015f3a20beda4dd36915a8fce"><div>
+            <h3>
+              <div class="m-doc-template">
+                template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span>, <span class="m-doc-template-param">typename... Us</span></span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">constexpr</a>
+					<a class="m-doc" href="#a7af6352ab79e9f068a6050a83cffb516">auto</a> <span class="m-doc-details-prefix">optica::<wbr/></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a class="m-doc-self" href="#a3768480015f3a20beda4dd36915a8fce">operator|</a>(</span><span class="m-doc-wrap"><a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Ts...&gt; left,
+              <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a>&lt;Us...&gt; right) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Pipe operator for accumulating properties.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">Ts</td>
+                  <td>Properties inside lhf <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a></td>
+                </tr>
+                <tr>
+                  <td>Us</td>
+                  <td>Properties inside rhf <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>left</td>
+                  <td>OptionBuilder&lt;Ts...&gt; Left operand must contain name and value</td>
+                </tr>
+                <tr>
+                  <td>right</td>
+                  <td>OptionBuilder&lt;Us...&gt; Right operand</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>OptionBuilder&lt;Ts...,Us...&gt; New option with properties from left and right operands</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-default"><h4>Remark</h4><p>Left operand requires ValidOrderExpression and whole expression requires ValidPropertyExpression for strict ordering in construction option</p></aside><pre class="m-code"><span class="c1">// Option1 is valid because Opt func sets Name and ValueType</span>
+<span class="k">auto</span> <span class="n">Option1</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Opt</span><span class="o">&lt;</span><span class="s">"Day"</span><span class="p">,</span> <span class="k">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">|</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Required</span><span class="p">();</span>
+<span class="c1">// Option2 is invalid because starts from Required</span>
+<span class="k">auto</span> <span class="n">Option2</span> <span class="o">=</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Required</span><span class="p">()</span> <span class="o">|</span> <span class="nn">optica</span><span class="o">::</span><span class="nf">Opt</span><span class="o">&lt;</span><span class="s">"Day"</span><span class="p">,</span> <span class="k">int</span><span class="o">&gt;</span><span class="p">;</span></pre>
           </div></section>
         </section>
       </div>

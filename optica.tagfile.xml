@@ -1,31 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile doxygen_version="1.9.8">
-  <compound kind="class">
-    <name>optica::ArityProperty</name>
-    <filename>structoptica_1_1_arity_property.html</filename>
-    <templarg>Arity Value</templarg>
-    <base>PropertyBase&lt; ArityProperty&lt; Value &gt; &gt;</base>
-    <member kind="function" static="yes">
-      <type>static constexpr std::size_t</type>
-      <name>GetNumberArgs</name>
-      <anchorfile>structoptica_1_1_arity_property.html</anchorfile>
-      <anchor>aa42f8e4d0a6f001ad5b514c5e7d33f01</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>optica::Exact</name>
-    <filename>structoptica_1_1_exact.html</filename>
-    <templarg>std::size_t Size</templarg>
-    <member kind="function" static="yes">
-      <type>static constexpr std::size_t</type>
-      <name>GetNumberArgs</name>
-      <anchorfile>structoptica_1_1_exact.html</anchorfile>
-      <anchor>a0e309646e77ff8ff3312d93329a38430</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
+  <compound kind="struct">
+    <name>optica::BaseProperty</name>
+    <filename>structoptica_1_1_base_property.html</filename>
+    <templarg>typename Derived</templarg>
   </compound>
   <compound kind="struct">
+    <name>optica::BindProperty</name>
+    <filename>structoptica_1_1_bind_property.html</filename>
+    <templarg>typename ValueType</templarg>
+    <base>BaseProperty&lt; BindProperty&lt; ValueType &gt; &gt;</base>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>BindProperty</name>
+      <anchorfile>structoptica_1_1_bind_property.html</anchorfile>
+      <anchor>a47eaaf409e68e7623a067b316a7ca0cc</anchor>
+      <arglist>(ValueType &amp;val) noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::BindPropertyTag</name>
+    <filename>structoptica_1_1_bind_property_tag.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>optica::DefaultValueProperty</name>
+    <filename>structoptica_1_1_default_value_property.html</filename>
+    <templarg>typename ValueType</templarg>
+    <base>BaseProperty&lt; DefaultValueProperty&lt; ValueType &gt; &gt;</base>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>DefaultValueProperty</name>
+      <anchorfile>structoptica_1_1_default_value_property.html</anchorfile>
+      <anchor>a25d00d951f01e954ed5e041d190bbcda</anchor>
+      <arglist>(ValueType default_value) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr const default_value_type &amp;</type>
+      <name>GetDefaultValue</name>
+      <anchorfile>structoptica_1_1_default_value_property.html</anchorfile>
+      <anchor>a1b18c8dce25622ae52d9120d7fe6479f</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>DefaultValueTag</name>
+    <filename>class_default_value_tag.html</filename>
+  </compound>
+  <compound kind="class">
     <name>optica::FixedString</name>
     <filename>structoptica_1_1_fixed_string.html</filename>
     <templarg>std::size_t N</templarg>
@@ -33,15 +54,15 @@
       <type>constexpr</type>
       <name>FixedString</name>
       <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
-      <anchor>a85add4e6e0eda02eb771c93ed013f6af</anchor>
-      <arglist>(const char(&amp;str)[N]) noexcept</arglist>
+      <anchor>a16cde23ece67af8500c5a4842a368092</anchor>
+      <arglist>(const char(&amp;str)[N+1]) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
-      <name>operator==</name>
+      <type>constexpr</type>
+      <name>FixedString</name>
       <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
-      <anchor>adbace514494cfcb4355f2462a65a22ab</anchor>
-      <arglist>(const FixedString&lt; U &gt; &amp;other) const noexcept</arglist>
+      <anchor>aef4a758e8b5a83d511cb01782ed646e8</anchor>
+      <arglist>(const std::array&lt; char, N &gt; str) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr</type>
@@ -50,69 +71,495 @@
       <anchor>a11ef25bf43bc826255319c0c297d5495</anchor>
       <arglist>() const noexcept</arglist>
     </member>
-    <member kind="variable">
-      <type>char</type>
-      <name>value</name>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>operator std::string</name>
       <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
-      <anchor>a8c95c7e16b7d39866e04643205e9f872</anchor>
-      <arglist>[N]</arglist>
+      <anchor>a838f03fb0b22f385cb3e93e58c08a7c5</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>operator==</name>
+      <anchorfile>structoptica_1_1_fixed_string.html</anchorfile>
+      <anchor>adbace514494cfcb4355f2462a65a22ab</anchor>
+      <arglist>(const FixedString&lt; U &gt; &amp;other) const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>optica::NameProperty</name>
+    <filename>structoptica_1_1_name_property.html</filename>
+    <templarg>FixedString NameValue</templarg>
+    <base>BaseProperty&lt; NameProperty&lt; NameValue &gt; &gt;</base>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>GetName</name>
+      <anchorfile>structoptica_1_1_name_property.html</anchorfile>
+      <anchor>a16a63463a1f0e72e11da1f2ea1351eea</anchor>
+      <arglist>() noexcept</arglist>
     </member>
   </compound>
   <compound kind="class">
-    <name>optica::OneOrMore</name>
-    <filename>structoptica_1_1_one_or_more.html</filename>
+    <name>optica::NamePropertyTag</name>
+    <filename>structoptica_1_1_name_property_tag.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>optica::Option</name>
+    <filename>structoptica_1_1_option.html</filename>
+    <templarg>Property... Properties</templarg>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>Option</name>
+      <anchorfile>structoptica_1_1_option.html</anchorfile>
+      <anchor>a3e20f1d1e3cb28db3f65e62edb04e81e</anchor>
+      <arglist>(Properties &amp;&amp;...props) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr std::string</type>
+      <name>GenerateDescription</name>
+      <anchorfile>structoptica_1_1_option.html</anchorfile>
+      <anchor>aa1833ad72474e7196c15f4083ec2c56c</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>optica::OptionBuilder</name>
+    <filename>structoptica_1_1_option_builder.html</filename>
+    <templarg>Property... Props</templarg>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>OptionBuilder</name>
+      <anchorfile>structoptica_1_1_option_builder.html</anchorfile>
+      <anchor>a7345fe2668b9d7515f9d1039806dedc1</anchor>
+      <arglist>() noexcept=default</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>OptionBuilder</name>
+      <anchorfile>structoptica_1_1_option_builder.html</anchorfile>
+      <anchor>a52e2e6670ed2168b013ee646ab72f38e</anchor>
+      <arglist>(Ts &amp;&amp;...args) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>operator Option&lt; Props... &gt;</name>
+      <anchorfile>structoptica_1_1_option_builder.html</anchorfile>
+      <anchor>ae1fb00f439ae3058f3b4a10f8194502f</anchor>
+      <arglist>() &amp;&amp;noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>optica::RequiredProperty</name>
+    <filename>structoptica_1_1_required_property.html</filename>
+    <base>BaseProperty&lt; RequiredProperty &gt;</base>
   </compound>
   <compound kind="class">
-    <name>optica::PropertyBase</name>
-    <filename>structoptica_1_1_property_base.html</filename>
-    <templarg>typename Derived</templarg>
+    <name>optica::RequiredPropertyTag</name>
+    <filename>structoptica_1_1_required_property_tag.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>optica::ShortNameProperty</name>
+    <filename>structoptica_1_1_short_name_property.html</filename>
+    <templarg>FixedString ShortName</templarg>
+    <base>BaseProperty&lt; ShortNameProperty&lt; ShortName &gt; &gt;</base>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>GetShortName</name>
+      <anchorfile>structoptica_1_1_short_name_property.html</anchorfile>
+      <anchor>a0d3c9db72ff97349a90b19acc93706f5</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>ShortNameTag</name>
+    <filename>class_short_name_tag.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>optica::Token</name>
+    <filename>structoptica_1_1_token.html</filename>
+    <member kind="enumeration">
+      <type></type>
+      <name>TokenType</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>a1c1acc7c91ee1e58d973a7264818b596</anchor>
+      <arglist></arglist>
+      <enumvalue file="structoptica_1_1_token.html" anchor="a1c1acc7c91ee1e58d973a7264818b596a6adf97f83acf6453d4a6a4b1070f3754">None</enumvalue>
+      <enumvalue file="structoptica_1_1_token.html" anchor="a1c1acc7c91ee1e58d973a7264818b596a07a094a210794e74a0e5e1a1457a92ee">Word</enumvalue>
+      <enumvalue file="structoptica_1_1_token.html" anchor="a1c1acc7c91ee1e58d973a7264818b596ab7786409e92804f0c7215acedc50c488">LongName</enumvalue>
+      <enumvalue file="structoptica_1_1_token.html" anchor="a1c1acc7c91ee1e58d973a7264818b596ad26b007baa81cc3cd38d8d6c93e6df42">ShortName</enumvalue>
+      <enumvalue file="structoptica_1_1_token.html" anchor="a1c1acc7c91ee1e58d973a7264818b596a639b3c5f8e9b0e7a5b36e4acd1ccbf9b">CompoundName</enumvalue>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>Token</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>aab994d109df5ee048d684979be9cbab7</anchor>
+      <arglist>() noexcept=default</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>Token</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>a6c0d9f0f82923f2d67b7ade2deb55b21</anchor>
+      <arglist>(std::string_view data, TokenType type) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>operator==</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>af99d7ab7e24d120db0f9dbca27c8ea97</anchor>
+      <arglist>(const Token &amp;other) const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr std::string_view</type>
+      <name>GetTokenData</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>ae2df331af838aefef877680d5926a76e</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr std::size_t</type>
+      <name>GetTokenSize</name>
+      <anchorfile>structoptica_1_1_token.html</anchorfile>
+      <anchor>a2d0a763a81a19add243c61126922d9dc</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::TokenIterator</name>
+    <filename>classoptica_1_1_token_iterator.html</filename>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>TokenIterator</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>a4e37ca4afacf4eff8a380486820f59e5</anchor>
+      <arglist>() noexcept=default</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>TokenIterator</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>a04d8be216d465d7b8879ed6bf5f99e21</anchor>
+      <arglist>(const char *data, const char *end) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr TokenIterator &amp;</type>
+      <name>operator++</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>a0a45173c7ab35dca5699bd839a54829d</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr TokenIterator</type>
+      <name>operator++</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>a9e91d6f2d35e509d195d19d33a8a29cf</anchor>
+      <arglist>(int) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>operator==</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>a92d20497033c017aa0c56b432042ec69</anchor>
+      <arglist>(const TokenIterator &amp;other) const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr const Token &amp;</type>
+      <name>operator*</name>
+      <anchorfile>classoptica_1_1_token_iterator.html</anchorfile>
+      <anchor>ae15ea0bb964a0fe7bc6926776395ad87</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::Tokenizer</name>
+    <filename>classoptica_1_1_tokenizer.html</filename>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>Tokenizer</name>
+      <anchorfile>classoptica_1_1_tokenizer.html</anchorfile>
+      <anchor>af7f10737c61d5f3d15bc7de369d51881</anchor>
+      <arglist>(std::string_view data) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr TokenIterator</type>
+      <name>begin</name>
+      <anchorfile>classoptica_1_1_tokenizer.html</anchorfile>
+      <anchor>a5a90766100cd48c32dc022d07bd1ae96</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr TokenIterator</type>
+      <name>end</name>
+      <anchorfile>classoptica_1_1_tokenizer.html</anchorfile>
+      <anchor>a92618bce6b7ee682e088d1fa3437af33</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>optica::ValueProperty</name>
+    <filename>structoptica_1_1_value_property.html</filename>
+    <templarg>typename ValueType</templarg>
+    <base>BaseProperty&lt; ValueProperty&lt; ValueType &gt; &gt;</base>
+    <member kind="function">
+      <type>constexpr ValueType</type>
+      <name>GetValueType</name>
+      <anchorfile>structoptica_1_1_value_property.html</anchorfile>
+      <anchor>a87fcbb0a55f67ba94b83f224ba67e0d3</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>optica::ValuePropertyTag</name>
+    <filename>structoptica_1_1_value_property_tag.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>optica::VariantProperty</name>
+    <filename>structoptica_1_1_variant_property.html</filename>
+    <templarg>typename ValueType</templarg>
+    <templarg>std::size_t N</templarg>
+    <base>BaseProperty&lt; VariantProperty&lt; ValueType, N &gt; &gt;</base>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>VariantProperty</name>
+      <anchorfile>structoptica_1_1_variant_property.html</anchorfile>
+      <anchor>a71b028a4c293876406710bdfff26b705</anchor>
+      <arglist>(Args &amp;&amp;...args) noexcept</arglist>
+    </member>
   </compound>
   <compound kind="concept">
-    <name>optica::Arity</name>
-    <filename>conceptoptica_1_1_arity.html</filename>
+    <name>optica::BindPropertyType</name>
+    <filename>conceptoptica_1_1_bind_property_type.html</filename>
   </compound>
   <compound kind="concept">
-    <name>optica::IsArityProperty</name>
-    <filename>conceptoptica_1_1_is_arity_property.html</filename>
+    <name>optica::DefaultValuePropertyType</name>
+    <filename>conceptoptica_1_1_default_value_property_type.html</filename>
   </compound>
   <compound kind="concept">
-    <name>optica::IsNumericArity</name>
-    <filename>conceptoptica_1_1_is_numeric_arity.html</filename>
+    <name>optica::HasBindPropertyType</name>
+    <filename>conceptoptica_1_1_has_bind_property_type.html</filename>
   </compound>
   <compound kind="concept">
-    <name>optica::IsTypedArity</name>
-    <filename>conceptoptica_1_1_is_typed_arity.html</filename>
+    <name>optica::HasDefaultValuePropertyType</name>
+    <filename>conceptoptica_1_1_has_default_value_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasMatchingDefaultValueType</name>
+    <filename>conceptoptica_1_1_has_matching_default_value_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasMatchingVariantPropertyType</name>
+    <filename>conceptoptica_1_1_has_matching_variant_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasNamePropertyType</name>
+    <filename>conceptoptica_1_1_has_name_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasRequiredPeopertyType</name>
+    <filename>conceptoptica_1_1_has_required_peoperty_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasShortNamePropertyType</name>
+    <filename>conceptoptica_1_1_has_short_name_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasValuePropertyType</name>
+    <filename>conceptoptica_1_1_has_value_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::HasVariantPropertyType</name>
+    <filename>conceptoptica_1_1_has_variant_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::MatchingDefaultAndValueTypes</name>
+    <filename>conceptoptica_1_1_matching_default_and_value_types.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::MatchingVariantAndValueTypes</name>
+    <filename>conceptoptica_1_1_matching_variant_and_value_types.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::NamePropertyType</name>
+    <filename>conceptoptica_1_1_name_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::OptionType</name>
+    <filename>conceptoptica_1_1_option_type.html</filename>
   </compound>
   <compound kind="concept">
     <name>optica::Property</name>
     <filename>conceptoptica_1_1_property.html</filename>
   </compound>
+  <compound kind="concept">
+    <name>optica::RequiredPropertyType</name>
+    <filename>conceptoptica_1_1_required_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::ShortNamePropertyType</name>
+    <filename>conceptoptica_1_1_short_name_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::UniqueProperties</name>
+    <filename>conceptoptica_1_1_unique_properties.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::ValidOrderExpression</name>
+    <filename>conceptoptica_1_1_valid_order_expression.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::ValidPropertyExpression</name>
+    <filename>conceptoptica_1_1_valid_property_expression.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::ValuePropertyType</name>
+    <filename>conceptoptica_1_1_value_property_type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>optica::VariantPropertyType</name>
+    <filename>conceptoptica_1_1_variant_property_type.html</filename>
+  </compound>
   <compound kind="namespace">
     <name>optica</name>
     <filename>namespaceoptica.html</filename>
-    <class kind="class">optica::ArityProperty</class>
-    <class kind="class">optica::Exact</class>
-    <class kind="struct">optica::FixedString</class>
-    <class kind="class">optica::OneOrMore</class>
-    <class kind="class">optica::PropertyBase</class>
+    <class kind="struct">optica::BaseProperty</class>
+    <class kind="struct">optica::BindProperty</class>
+    <class kind="class">optica::BindPropertyTag</class>
+    <class kind="struct">optica::DefaultValueProperty</class>
+    <class kind="class">optica::FixedString</class>
+    <class kind="struct">optica::NameProperty</class>
+    <class kind="class">optica::NamePropertyTag</class>
+    <class kind="struct">optica::Option</class>
+    <class kind="struct">optica::OptionBuilder</class>
+    <class kind="struct">optica::RequiredProperty</class>
+    <class kind="class">optica::RequiredPropertyTag</class>
+    <class kind="struct">optica::ShortNameProperty</class>
+    <class kind="class">optica::Token</class>
+    <class kind="class">optica::TokenIterator</class>
+    <class kind="class">optica::Tokenizer</class>
+    <class kind="struct">optica::ValueProperty</class>
+    <class kind="class">optica::ValuePropertyTag</class>
+    <class kind="struct">optica::VariantProperty</class>
+    <concept>optica::OptionType</concept>
+    <concept>optica::UniqueProperties</concept>
+    <concept>optica::MatchingDefaultAndValueTypes</concept>
+    <concept>optica::HasMatchingDefaultValueType</concept>
+    <concept>optica::MatchingVariantAndValueTypes</concept>
+    <concept>optica::HasMatchingVariantPropertyType</concept>
+    <concept>optica::ValidOrderExpression</concept>
+    <concept>optica::ValidPropertyExpression</concept>
     <concept>optica::Property</concept>
-    <concept>optica::IsNumericArity</concept>
-    <concept>optica::IsTypedArity</concept>
-    <concept>optica::Arity</concept>
-    <concept>optica::IsArityProperty</concept>
-    <member kind="function">
-      <type>constexpr bool</type>
-      <name>ParseType</name>
+    <concept>optica::NamePropertyType</concept>
+    <concept>optica::HasNamePropertyType</concept>
+    <concept>optica::ValuePropertyType</concept>
+    <concept>optica::HasValuePropertyType</concept>
+    <concept>optica::RequiredPropertyType</concept>
+    <concept>optica::HasRequiredPeopertyType</concept>
+    <concept>optica::DefaultValuePropertyType</concept>
+    <concept>optica::HasDefaultValuePropertyType</concept>
+    <concept>optica::ShortNamePropertyType</concept>
+    <concept>optica::HasShortNamePropertyType</concept>
+    <concept>optica::BindPropertyType</concept>
+    <concept>optica::HasBindPropertyType</concept>
+    <concept>optica::VariantPropertyType</concept>
+    <concept>optica::HasVariantPropertyType</concept>
+    <member kind="typedef">
+      <type>Prop::Tag</type>
+      <name>PropertyTag_t</name>
       <anchorfile>namespaceoptica.html</anchorfile>
-      <anchor>a0c335c6c57d9af478c3c4247e01da80e</anchor>
-      <arglist>(std::string_view data, T &amp;)</arglist>
+      <anchor>a7af6352ab79e9f068a6050a83cffb516</anchor>
+      <arglist></arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
-      <name>ParseType&lt; int &gt;</name>
+      <type></type>
+      <name>FixedString</name>
       <anchorfile>namespaceoptica.html</anchorfile>
-      <anchor>ac3181a5661e573da2c9ca34e6094058a</anchor>
-      <arglist>(std::string_view data, int &amp;res)</arglist>
+      <anchor>a3ee7143b88b9ea9fbbbe6bdc5b908046</anchor>
+      <arglist>(const char(&amp;str)[N]) -&gt; FixedString&lt; N - 1 &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Option</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>ae8ec40df32e2de4267719d0f81d2909f</anchor>
+      <arglist>(Props &amp;&amp;...) -&gt; Option&lt; std::decay_t&lt; Props &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>CreateOption</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a7bc9bd57dde7eb1f89230a1beebb5766</anchor>
+      <arglist>(OptionBuilder&lt; Props... &gt; &amp;&amp;value) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>CreateOption</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a03f7a9e8be11ecdffb6fbf9cb6b15017</anchor>
+      <arglist>(OptionBuilder&lt; Props... &gt; value) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator|</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a3768480015f3a20beda4dd36915a8fce</anchor>
+      <arglist>(OptionBuilder&lt; Ts... &gt; left, OptionBuilder&lt; Us... &gt; right) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>Opt</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>ab418af7017abfe9412d0d2f97a42e607</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>Required</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a1e2a56aec22b15876ce9a44aaf7a9997</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>Flag</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a705283c43e4a86ca01176e888b481322</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>DefaultValue</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>af4eaf0445aabea9c6cac25251c46a326</anchor>
+      <arglist>(ValueType value) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>ShortName</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a4603775509f679b394615530899a560e</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>Bind</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a1e8496b24fceadb14704f3175b84c7e6</anchor>
+      <arglist>(ValueType &amp;value) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>Variant</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a303a9462ba2373e47b88e235b54b0718</anchor>
+      <arglist>(ValueType &amp;&amp;...vals) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval std::size_t</type>
+      <name>CountTags</name>
+      <anchorfile>namespaceoptica.html</anchorfile>
+      <anchor>a1b8f8074524cddfb93dcca69c1698133</anchor>
+      <arglist>()</arglist>
     </member>
   </compound>
 </tagfile>

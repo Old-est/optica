@@ -55,15 +55,30 @@
         <h1>Classes</h1>
         <ul class="m-doc">
           <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)">namespace</a> <a class="m-doc" href="namespaceoptica.html">optica</a> <span class="m-doc">The root namespace for all optica functions and types.</span>
+            <a href="#" onclick="return toggle(this)">namespace</a> <a class="m-doc" href="namespaceoptica.html">optica</a> <span class="m-doc">Core namespace of the library.</span>
             <ul class="m-doc">
-              <li>class <a class="m-doc" href="structoptica_1_1_arity_property.html">ArityProperty</a> <span class="m-doc">Represents Arity property (Possible number of arguments)</span></li>
-              <li>class <a class="m-doc" href="structoptica_1_1_exact.html">Exact</a> <span class="m-doc">Represents option takes exact number.</span></li>
-              <li>struct <a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> <span class="m-doc">Compiletime friendly fixed size string used as NTTP.</span></li>
-              <li>class <a class="m-doc" href="structoptica_1_1_one_or_more.html">OneOrMore</a> <span class="m-doc">Represents option takes at least one argument.</span></li>
-              <li>class <a class="m-doc" href="structoptica_1_1_property_base.html">PropertyBase</a> <span class="m-doc">Base class for any kind CMD option.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_base_property.html">BaseProperty</a> <span class="m-doc">Represents family of properties.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a> <span class="m-doc">Represents <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a>.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_bind_property_tag.html">BindPropertyTag</a> <span class="m-doc">Tag for <a class="m-doc" href="structoptica_1_1_bind_property.html">BindProperty</a>.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_default_value_property.html">DefaultValueProperty</a> <span class="m-doc">Represents <a class="m-doc" href="structoptica_1_1_default_value_property.html">DefaultValueProperty</a>.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_fixed_string.html">FixedString</a> <span class="m-doc">Represents compile time string.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_name_property.html">NameProperty</a> <span class="m-doc">Property holds name set by template parameter.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_name_property_tag.html">NamePropertyTag</a> <span class="m-doc">Tag for <a class="m-doc" href="structoptica_1_1_name_property.html">NameProperty</a>.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_option.html">Option</a> <span class="m-doc">Represents Combined sets of Property.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_option_builder.html">OptionBuilder</a> <span class="m-doc">Struct that provide abillity to store and accumulate different properties.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_required_property.html">RequiredProperty</a> <span class="m-doc">Property tels is required value or not.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_required_property_tag.html">RequiredPropertyTag</a> <span class="m-doc">Tag for <a class="m-doc" href="structoptica_1_1_required_property.html">RequiredProperty</a>.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_short_name_property.html">ShortNameProperty</a> <span class="m-doc">Represents short name property for option.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_token.html">Token</a> <span class="m-doc">This class represents token extracted from string.</span></li>
+              <li>class <a class="m-doc" href="classoptica_1_1_token_iterator.html">TokenIterator</a> <span class="m-doc"><a class="m-doc poxy-injected poxy-external poxy-cppreference poxy-named-requirement" href="https://en.cppreference.com/w/cpp/named_req/Iterator" target="_blank">Iterator</a> on string_view.</span></li>
+              <li>class <a class="m-doc" href="classoptica_1_1_tokenizer.html">Tokenizer</a> <span class="m-doc">Class that creates Tokenized context.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_value_property.html">ValueProperty</a> <span class="m-doc">Proprty holds ValueType.</span></li>
+              <li>class <a class="m-doc" href="structoptica_1_1_value_property_tag.html">ValuePropertyTag</a> <span class="m-doc">Tag for <a class="m-doc" href="structoptica_1_1_value_property.html">ValueProperty</a>.</span></li>
+              <li>struct <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a> <span class="m-doc">Represents <a class="m-doc" href="structoptica_1_1_variant_property.html">VariantProperty</a>.</span></li>
             </ul>
           </li>
+          <li>class <a class="m-doc" href="class_default_value_tag.html">DefaultValueTag</a> <span class="m-doc">Tag for DefaultValueProperty.</span></li>
+          <li>class <a class="m-doc" href="class_short_name_tag.html">ShortNameTag</a> <span class="m-doc">Tag for ShortNameProperty.</span></li>
         </ul>
         <script>
         function toggle(e) {
