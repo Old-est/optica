@@ -1,5 +1,7 @@
 # optica
 
+It's small library
+
 # Basic usage
 
 
