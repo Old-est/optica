@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/deps.cmake)
+include(cmake/clang-format.cmake)
 
 option(OPTICA_MODULE "Build C++ module" OFF)
 
