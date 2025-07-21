@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    container:
+      image: archlinux
 
     steps:
       - name: Checkout repo
@@ -16,14 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-15 cmake ninja-build
-
-      - name: Set GCC 15 as default
-        run: |
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100 \
-                                   --slave /usr/bin/gcc gcc /usr/bin/gcc-15
-          g++ --version  # проверить
+          sudo pacman -Sy --noconfirm base-devel cmake gcc ninja
 
       - name: Configure CMake
         run: cmake -DOPTICA_BUILD_TESTS=ON -S . -B build -G Ninja
