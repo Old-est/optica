@@ -106,7 +106,7 @@ class ParseResult {
   static consteval int GetIndexByName(std::index_sequence<Is...> idxs) {
     auto names = details::ConstructNamesArray<Options...>();
     for (std::size_t i = 0; i < names.size(); ++i) {
-      if (names[i] == static_cast<std::string>(Name)) {
+      if (names[i] == static_cast<std::string_view>(Name)) {
         return i;
       }
     };

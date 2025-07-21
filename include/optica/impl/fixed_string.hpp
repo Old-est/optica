@@ -16,8 +16,8 @@ namespace optica {
  *
  * @note Used as NTTP for naming options
  */
-template <std::size_t N> struct FixedString {
-
+template <std::size_t N>
+struct FixedString {
   /**
    * @brief Constructs fixed size string from string literal
    *
@@ -43,12 +43,12 @@ template <std::size_t N> struct FixedString {
     return {data.data(), data.size()};
   }
 
-  /**
-   * @brief Converts Fixed string into general string
-   */
-  constexpr operator std::string() const noexcept {
-    return {data.data(), data.size()};
-  }
+  // /**
+  //  * @brief Converts Fixed string into general string
+  //  */
+  // constexpr operator std::string() const noexcept {
+  //   return {data.data(), data.size()};
+  // }
 
   /**
    * @brief Checks if 2 strings are equal
@@ -85,4 +85,4 @@ template <std::size_t N> struct FixedString {
  */
 template <std::size_t N>
 FixedString(const char (&str)[N]) -> FixedString<N - 1>;
-} // namespace optica
+}  // namespace optica

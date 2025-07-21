@@ -83,8 +83,6 @@ struct Option : Properties... {
     if (token_type == Token::TokenType::LongName) {
       if constexpr (HasNamePropertyType<Properties...>) {
         if (token_name == this->GetName()) {
-          std::println("Token: {} matched with option {}", *start,
-                       static_cast<std::string>(this->GetName()));
           return Consume(start, end);
         }
       } else {
@@ -95,9 +93,6 @@ struct Option : Properties... {
     if (token_type == Token::TokenType::ShortName) {
       if constexpr (HasShortNamePropertyType<Properties...>) {
         if (token_name == this->GetShortName()) {
-          std::println("Token: {} matched with option {}", *start,
-                       static_cast<std::string>(this->GetShortName()));
-
           return Consume(start, end);
         }
       } else {
@@ -125,7 +120,6 @@ struct Option : Properties... {
         ParsedValue res;
         for (std::size_t i = 0; i < size; ++i) {
           res[i] = TypeParser<ParsedValue>::ParseValue(*(++start));
-          std::println("My Arity is {}", ArityType::GetNumberArgs());
         }
         return ReturnType{
             .type = ResultType::Ok, .advance = size + 1, .value = res};
