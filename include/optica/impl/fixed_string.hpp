@@ -43,12 +43,12 @@ struct FixedString {
     return {data.data(), data.size()};
   }
 
-  // /**
-  //  * @brief Converts Fixed string into general string
-  //  */
-  // constexpr operator std::string() const noexcept {
-  //   return {data.data(), data.size()};
-  // }
+  /**
+   * @brief Converts Fixed string into general string
+   */
+  constexpr operator std::string() const noexcept {
+    return {data.data(), data.size()};
+  }
 
   /**
    * @brief Checks if 2 strings are equal
