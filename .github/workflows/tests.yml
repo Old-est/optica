@@ -19,7 +19,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc-15 cmake ninja-build
 
-      - name: Set GCC 14 as default
+      - name: Set GCC 15 as default
         run: |
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100 \
                                    --slave /usr/bin/gcc gcc /usr/bin/gcc-15
