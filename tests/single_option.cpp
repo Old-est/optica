@@ -17,5 +17,5 @@ TEST_CASE("Option can be parsed by long name with =", "[option]") {
 TEST_CASE("Option can be parsed by short name", "[option]") {
   constexpr std::string_view cmd = "-d 42";
   auto result = parser.Parse(cmd);
-  REQUIRE(result.Get<"day">().value() == 10);
+  REQUIRE(result.Get<"day">().value() == 42);
 }
