@@ -18,6 +18,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Prepare git repository for diff
+        run: |
+          git init
+          git remote add origin https://github.com/${{ github.repository }}
+          git fetch origin ${{ github.sha }}
+          git reset --hard FETCH_HEAD
+
       - name: Install dependencies
         run: |
           pacman -Sy --noconfirm base-devel cmake gcc ninja git clang
