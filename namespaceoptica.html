@@ -162,40 +162,15 @@
           <h2><a href="#nested-concepts">Concepts</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_matching_variant_and_value_types.html">MatchingVariantAndValueTypes</a>
-            </dt>
-            <dd>Checks if Holding ValueType and VariantProperty type are same.</dd>
-            <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_required_property_type.html">RequiredPropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_default_value_property_type.html">DefaultValuePropertyType</a>
             </dt>
-            <dd>Checks if type is RequiredProperty.</dd>
+            <dd>Checks if T is DefaultValueProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_default_value_property_type.html">HasDefaultValuePropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_variant_property_type.html">HasVariantPropertyType</a>
             </dt>
-            <dd>Checks if parameters pack contains DefaultValueProperty.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_name_property_type.html">NamePropertyType</a>
-            </dt>
-            <dd>Checks if type is NameProperty.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_property.html">Property</a>
-            </dt>
-            <dd>Checks if a type is property type.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_short_name_property_type.html">ShortNamePropertyType</a>
-            </dt>
-            <dd>Checks if T is ShortNameProperty.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_value_property_type.html">ValuePropertyType</a>
-            </dt>
-            <dd>Checks if type is ValueProperty.</dd>
+            <dd>Checks if parameters pack contains VariantProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_valid_property_expression.html">ValidPropertyExpression</a>
@@ -203,14 +178,19 @@
             <dd>Cchecks if Property expression is valid.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_bind_property_type.html">HasBindPropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_short_name_property_type.html">HasShortNamePropertyType</a>
             </dt>
-            <dd>Checks if parameters pack contains BindProperty.</dd>
+            <dd>Checks if parameters pack contains ShortNameProperty.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_unique_properties.html">UniqueProperties</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_value_property_type.html">ValuePropertyType</a>
             </dt>
-            <dd>Checks if all properties are unique.</dd>
+            <dd>Checks if type is ValueProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_required_property_type.html">RequiredPropertyType</a>
+            </dt>
+            <dd>Checks if type is RequiredProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_bind_property_type.html">BindPropertyType</a>
@@ -218,14 +198,34 @@
             <dd>Checks if T is BindProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_variant_property_type.html">HasMatchingVariantPropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_unique_properties.html">UniqueProperties</a>
             </dt>
-            <dd>Checks if set of the Properties has VariantProperty and if it has checks equality holding ValueType and VariantProperty Type.</dd>
+            <dd>Checks if all properties are unique.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_short_name_property_type.html">ShortNamePropertyType</a>
+            </dt>
+            <dd>Checks if T is ShortNameProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_short_name_property_type.html">HasShortNamePropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_name_property_type.html">HasNamePropertyType</a>
             </dt>
-            <dd>Checks if parameters pack contains ShortNameProperty.</dd>
+            <dd>Checks if parameters pack contains NameProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_default_value_type.html">HasMatchingDefaultValueType</a>
+            </dt>
+            <dd>Checks if set of Properties has DefaultValueProperty and are it same as Holding ValueType.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_valid_order_expression.html">ValidOrderExpression</a>
+            </dt>
+            <dd>Checks if Option expression starts with Opt.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_matching_variant_and_value_types.html">MatchingVariantAndValueTypes</a>
+            </dt>
+            <dd>Checks if Holding ValueType and VariantProperty type are same.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_has_required_peoperty_type.html">HasRequiredPeopertyType</a>
@@ -233,49 +233,49 @@
             <dd>Checks if parameters pack contains RequiredProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_name_property_type.html">HasNamePropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_default_value_property_type.html">HasDefaultValuePropertyType</a>
             </dt>
-            <dd>Checks if parameters pack contains NameProperty.</dd>
+            <dd>Checks if parameters pack contains DefaultValueProperty.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_variant_property_type.html">HasMatchingVariantPropertyType</a>
+            </dt>
+            <dd>Checks if set of the Properties has VariantProperty and if it has checks equality holding ValueType and VariantProperty Type.</dd>
+            <dt>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_name_property_type.html">NamePropertyType</a>
+            </dt>
+            <dd>Checks if type is NameProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_has_value_property_type.html">HasValuePropertyType</a>
             </dt>
             <dd>Checks if parameters pack contains ValueProperty.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_matching_default_and_value_types.html">MatchingDefaultAndValueTypes</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_option_type.html">OptionType</a>
             </dt>
-            <dd>Checks if Holding ValueType and DefaultValueType are same.</dd>
-            <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_variant_property_type.html">HasVariantPropertyType</a>
-            </dt>
-            <dd>Checks if parameters pack contains VariantProperty.</dd>
+            <dd>Checks if T is Option.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
               concept <a class="m-doc" href="conceptoptica_1_1_variant_property_type.html">VariantPropertyType</a>
             </dt>
             <dd>Checks if type T is VariantProperty.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_has_matching_default_value_type.html">HasMatchingDefaultValueType</a>
-            </dt>
-            <dd>Checks if set of Properties has DefaultValueProperty and are it same as Holding ValueType.</dd>
-            <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_default_value_property_type.html">DefaultValuePropertyType</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_property.html">Property</a>
             </dt>
-            <dd>Checks if T is DefaultValueProperty.</dd>
+            <dd>Checks if a type is property type.</dd>
             <dt>
-              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename T</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_option_type.html">OptionType</a>
+              <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Ts</span></span>&gt;</div>
+              concept <a class="m-doc" href="conceptoptica_1_1_has_bind_property_type.html">HasBindPropertyType</a>
             </dt>
-            <dd>Checks if T is Option.</dd>
+            <dd>Checks if parameters pack contains BindProperty.</dd>
             <dt>
               <div class="m-doc-template">template &lt;<span class="m-doc-template-params"><span class="m-doc-template-param">typename... Properties</span></span>&gt;</div>
-              concept <a class="m-doc" href="conceptoptica_1_1_valid_order_expression.html">ValidOrderExpression</a>
+              concept <a class="m-doc" href="conceptoptica_1_1_matching_default_and_value_types.html">MatchingDefaultAndValueTypes</a>
             </dt>
-            <dd>Checks if Option expression starts with Opt.</dd>
+            <dd>Checks if Holding ValueType and DefaultValueType are same.</dd>
           </dl>
         </section>
         <section id="typedef-members">
