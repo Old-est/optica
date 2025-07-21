@@ -1,7 +1,7 @@
 # optica
 
 It's small library
-optica stands
+optica stands from
 
 # Basic usage
 
