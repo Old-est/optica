@@ -8,44 +8,44 @@ on:
 
 jobs:
   clang-format:
-  runs-on: ubuntu-latest
-  container:
-    image: archlinux
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
 
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        pacman -Sy --noconfirm base-devel cmake gcc ninja git clang-format
+      - name: Install dependencies
+        run: |
+          pacman -Sy --noconfirm base-devel cmake gcc ninja git clang-format
 
-    - name: Configure CMake
-      run: cmake -S . -B build -G Ninja
+      - name: Configure CMake
+        run: cmake -S . -B build -G Ninja
 
-    - name: clang-format check
-      run: cmake --build ./build --target clang_format_check
+      - name: clang-format check
+        run: cmake --build ./build --target clang_format_check
 
-    - name: clang-format apply
-      if: ${{ failure() && github.event_name == 'pull_request' }}
-      run: cmake --build ./build --target clang_format_fix
+      - name: clang-format apply
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        run: cmake --build ./build --target clang_format_fix
 
-    - name: Create patch
-      if: ${{ failure() && github.event_name == 'pull_request' }}
-      run: |
-        echo 'Please fix the formatting issues by running clang-format, or directly apply this patch:' > clang-format.patch
-        echo '<details>' >> clang-format.patch
-        echo '<summary>clang-format.patch</summary>' >> clang-format.patch
-        echo >> clang-format.patch
-        echo '```diff' >> clang-format.patch
-        git diff >> clang-format.patch
-        echo '```' >> clang-format.patch
-        echo >> clang-format.patch
-        echo '</details>' >> clang-format.patch
+      - name: Create patch
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        run: |
+          echo 'Please fix the formatting issues by running clang-format, or directly apply this patch:' > clang-format.patch
+          echo '<details>' >> clang-format.patch
+          echo '<summary>clang-format.patch</summary>' >> clang-format.patch
+          echo >> clang-format.patch
+          echo '```diff' >> clang-format.patch
+          git diff >> clang-format.patch
+          echo '```' >> clang-format.patch
+          echo >> clang-format.patch
+          echo '</details>' >> clang-format.patch
 
-    - name: Comment patch
-      if: ${{ failure() && github.event_name == 'pull_request' }}
-      uses: mshick/add-pr-comment@v2
-      with:
-        message-path: |
-            clang-format.patch
+      - name: Comment patch
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-path: |
+              clang-format.patch
