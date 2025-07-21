@@ -13,7 +13,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake g++ ninja-build
+        run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          sudo apt-get update
+          sudo apt-get install -y g++-14 cmake ninja-build
+
+      - name: Set GCC 14 as default
+        run: |
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 \
+                                   --slave /usr/bin/gcc gcc /usr/bin/gcc-14
+          g++ --version  # проверить
 
       - name: Configure CMake
         run: cmake -DOPTICA_BUILD_TESTS=ON -S . -B build -G Ninja
