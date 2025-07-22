@@ -14,4 +14,4 @@ using optica::Required;
 using optica::ShortName;
 using optica::Variant;
 using optica::operator|;
-} // namespace optica
+}  // namespace optica

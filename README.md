@@ -1,8 +1,10 @@
 # optica
 
+It's small library
+optica stands from
+
 # Basic usage
 
-mememem
 
 ```cpp
 #include <optica/optica.hpp>
