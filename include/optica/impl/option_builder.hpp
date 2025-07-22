@@ -296,6 +296,10 @@ constexpr auto Arity() noexcept {
  *
  * @tparam Name FixedString CompileTime string
  * @tparam ValueType value which holds argument
+ *
+ * @remark
+ * Parser will parse positional args relatively their's order 
+ * in construction
  */
 template <FixedString Name, typename ValueType>
 constexpr auto Positional() noexcept {

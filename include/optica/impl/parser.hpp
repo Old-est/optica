@@ -151,6 +151,7 @@ class Parser {
                  }
                  std::get<Is>(result.values_) = std::move(consume_result.value);
                  steps_count = consume_result.advance;
+                 std::println("Steps: {}", steps_count);
                  ++parsed;
                  return true;
                }
@@ -165,6 +166,7 @@ class Parser {
                  }
                  std::get<Is>(result.values_) = std::move(consume_result.value);
                  steps_count = consume_result.advance;
+                 std::println("Steps: {}", steps_count);
                  ++parsed;
                  return true;
                }

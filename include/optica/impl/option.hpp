@@ -76,7 +76,8 @@ struct Option : Properties... {
 
     auto token_type = (*start).GetTokenType();
 
-    if (token_type == Token::TokenType::Word) {
+    if (token_type == Token::TokenType::Word or
+        token_type == Token::TokenType::CompoundName) {
       if constexpr (HasPositionalPropertyType<Properties...>) {
         auto res = Consume(start, end);
         res.advance = res.advance - 1;
@@ -128,6 +129,7 @@ struct Option : Properties... {
         ParsedValue res;
         for (std::size_t i = 0; i < size; ++i) {
           res[i] = TypeParser<ParsedValue>::ParseValue(*(start));
+          ++start;
         }
         return ReturnType{
             .type = ResultType::Ok, .advance = size + 1, .value = res};
