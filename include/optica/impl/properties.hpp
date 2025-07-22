@@ -386,6 +386,11 @@ concept VariantPropertyType = details::is_variant_property<T>::value;
 template <typename... Ts>
 concept HasVariantPropertyType = (VariantPropertyType<Ts> || ...);
 
+/**
+ * @struct Exact
+ * @brief Represents compiletime number of args
+ *
+ */
 template <std::size_t N>
 struct Exact {
   static constexpr std::size_t GetNumberArgs() noexcept { return N; }
@@ -399,15 +404,36 @@ template <std::size_t N>
 struct is_exact_arity<Exact<N>> : std::true_type {};
 }  // namespace details
 
+/**
+ * @concept ExactArity
+ * @brief Checks if T is Exact
+ */
 template <typename T>
 concept ExactArity = details::is_exact_arity<T>::value;
 
+/**
+ * @brief Alias to Exact<1>
+ */
 using One = Exact<1>;
+
+/**
+ * @brief Alias to Exact<2>
+ */
 using Two = Exact<2>;
+
+/**
+ * @brief Alias to Exact<3>
+ */
 using Three = Exact<3>;
 
 struct ArityPropertyTag {};
 
+/**
+ * @struct ArityProperty
+ * @brief Represents ArityProperty
+ *
+ * @tparam T One of ArityArgs
+ */
 template <typename T>
 struct ArityProperty : BaseProperty<ArityProperty<T>> {
   using Tag = ArityPropertyTag;
@@ -424,10 +450,45 @@ template <typename T>
 struct is_arity_property<ArityProperty<T>> : std::true_type {};
 }  // namespace details
 
+/**
+ * @concept ArityPropertyType
+ * @brief Checks if type T is ArityProperty
+ */
 template <typename T>
 concept ArityPropertyType = details::is_arity_property<T>::value;
 
+/**
+ * @concept HasArityProperty
+ * @brief Checks if parameters pack contains ArityProperty
+ */
 template <typename... Ts>
 concept HasArityPropertyType = (ArityPropertyType<Ts> || ...);
+
+struct PositionalPropertyTag {};
+
+/**
+ * @struct PositionalProperty
+ * @brief Represents PositionalProperty
+ * @note
+ * PositionalProperty marks that it's a positional argument. This means no long
+ * name or short name, just value
+ */
+struct PositionalProperty : BaseProperty<PositionalProperty> {
+  using Tag = PositionalPropertyTag;
+};
+
+/**
+ * @concept PositionalPropertyType
+ * @brief Checks if type T is PositionalProperty
+ */
+template <typename T>
+concept PositionalPropertyType = std::is_same_v<T, PositionalProperty>;
+
+/**
+ * @concept HasPositionalPropertyType
+ * @brief Checks if parameters pack contains PositionalProperty
+ */
+template <typename... Ts>
+concept HasPositionalPropertyType = (PositionalPropertyType<Ts> || ...);
 
 }  // namespace optica

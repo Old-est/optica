@@ -21,16 +21,17 @@ struct optica::TypeParser<Mom> {
 
 int main(int argc, char* argv[]) {
   constexpr auto parser = optica::Parser(
-      optica::Opt<"Sosal", std::array<int, 3>>() | optica::Required() |
-          optica::ShortName<"s">() | optica::Arity<optica::Three>(),
-      optica::Opt<"Ebal", Mom>());
+      optica::Positional<"year", int>(), optica::Positional<"month", int>(),
+      optica::Positional<"day", int>(),
+      optica::Opt<"mem", int>() | optica::ShortName<"m">());
 
-  auto kek = parser.Parse("--Sosal 25 3 7 --Ebal={1,, mom}");
+  constexpr std::string_view cmd = "2025 -m 33 07 22";
+  auto res = parser.Parse(cmd);
 
-  std::println("Value is: {}", kek.Get<"Sosal">().value());
-  auto compound_val = kek.Get<"Ebal">().value();
-  std::println("Value is: {} {} {}", compound_val.a, compound_val.b,
-               compound_val.c);
+  std::println("Mem: {}", res.Get<"mem">().value());
+  std::println("Year: {}", res.Get<"year">().value());
+  std::println("Month: {}", res.Get<"month">().value());
+  std::println("Day: {}", res.Get<"day">().value());
 
   return 0;
 }

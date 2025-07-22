@@ -10,6 +10,7 @@ namespace optica {
 enum class ResultType {
   Ok,
   False,
+  PositionalMatch,
 };
 template <typename ValueType>
 struct ConsumeResult {
@@ -76,14 +77,21 @@ struct Option : Properties... {
     auto token_type = (*start).GetTokenType();
 
     if (token_type == Token::TokenType::Word) {
-      throw std::invalid_argument("ERROR: Currently unsupported");
+      if constexpr (HasPositionalPropertyType<Properties...>) {
+        auto res = Consume(start, end);
+        res.advance = res.advance - 1;
+        res.type = ResultType::PositionalMatch;
+        return res;
+      } else {
+        return ReturnType{.type = ResultType::False, .advance = 0};
+      }
     }
     auto token_name = (*start).GetTokenData();
 
     if (token_type == Token::TokenType::LongName) {
       if constexpr (HasNamePropertyType<Properties...>) {
         if (token_name == this->GetName()) {
-          return Consume(start, end);
+          return Consume(++start, end);
         }
       } else {
         return ReturnType{.type = ResultType::False, .advance = 0};
@@ -93,7 +101,7 @@ struct Option : Properties... {
     if (token_type == Token::TokenType::ShortName) {
       if constexpr (HasShortNamePropertyType<Properties...>) {
         if (token_name == this->GetShortName()) {
-          return Consume(start, end);
+          return Consume(++start, end);
         }
       } else {
         return ReturnType{.type = ResultType::False, .advance = 0};
@@ -110,7 +118,7 @@ struct Option : Properties... {
     if constexpr (!HasArityPropertyType<Properties...> and
                   !std::is_same_v<ParsedValue, bool>) {
       constexpr int tokens_number = 1;
-      auto value = TypeParser<ParsedValue>::ParseValue(*(++start));
+      auto value = TypeParser<ParsedValue>::ParseValue(*(start));
       return ReturnType{.type = ResultType::Ok, .advance = 2, .value = value};
     }
     if constexpr (HasArityPropertyType<Properties...>) {
@@ -119,7 +127,7 @@ struct Option : Properties... {
         constexpr std::size_t size = ArityType::GetNumberArgs();
         ParsedValue res;
         for (std::size_t i = 0; i < size; ++i) {
-          res[i] = TypeParser<ParsedValue>::ParseValue(*(++start));
+          res[i] = TypeParser<ParsedValue>::ParseValue(*(start));
         }
         return ReturnType{
             .type = ResultType::Ok, .advance = size + 1, .value = res};
