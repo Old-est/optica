@@ -131,13 +131,25 @@ concept ValidOrderExpression =
     HasNamePropertyType<Properties...> && HasValuePropertyType<Properties...>;
 
 /**
+ * @concept HasPositionalAndNotShortName
+ * @brief Checks case when option is Positional argument.
+ * If it's true, checks that option doesn't have short name
+ */
+template <typename... Properties>
+concept HasPositionalAndNotShortName =
+    !HasPositionalPropertyType<Properties...> ||
+    !HasShortNamePropertyType<Properties...>;
+
+/**
  * @concept ValidPropertyExpression
  * @brief Cchecks if Property expression is valid
  */
 template <typename... Properties>
-concept ValidPropertyExpression = UniqueProperties<Properties...> &&
-                                  HasMatchingDefaultValueType<Properties...> &&
-                                  HasMatchingVariantPropertyType<Properties...>;
+concept ValidPropertyExpression =
+    UniqueProperties<Properties...> &&
+    HasMatchingDefaultValueType<Properties...> &&
+    HasMatchingVariantPropertyType<Properties...> &&
+    HasPositionalAndNotShortName<Properties...>;
 
 /**
  * @brief Pipe operator for accumulating properties
@@ -265,9 +277,34 @@ constexpr auto Variant(ValueType &&...vals) noexcept {
           std::forward<ValueType>(vals)...}};
 }
 
+/**
+ * @brief Sets ArityProperty for option
+ *
+ * @tparam ArityType
+ *
+ * @details
+ * Sets ArityProprty. In terms of optica ArityProperty means
+ * how many arguments in sequence is expected
+ */
 template <typename ArityType>
 constexpr auto Arity() noexcept {
   return OptionBuilder<ArityProperty<ArityType>>{};
+}
+
+/**
+ * @brief Creates Positional Argument
+ *
+ * @tparam Name FixedString CompileTime string
+ * @tparam ValueType value which holds argument
+ *
+ * @remark
+ * Parser will parse positional args relatively their order
+ * in construction
+ */
+template <FixedString Name, typename ValueType>
+constexpr auto Positional() noexcept {
+  return OptionBuilder<NameProperty<Name>, ValueProperty<ValueType>,
+                       PositionalProperty>{};
 }
 
 }  // namespace optica

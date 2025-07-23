@@ -145,6 +145,16 @@ class Parser {
             (([&] {
                auto consume_result =
                    std::get<Is>(options_).TryConsume(begin, end);
+               if (consume_result.type == ResultType::PositionalMatch) {
+                 if (std::get<Is>(result.values_).has_value()) {
+                   return false;
+                 }
+                 std::get<Is>(result.values_) = std::move(consume_result.value);
+                 steps_count = consume_result.advance;
+                 std::println("Steps: {}", steps_count);
+                 ++parsed;
+                 return true;
+               }
                if (consume_result.type == ResultType::Ok) {
                  if (std::get<Is>(result.values_).has_value()) {
                    std::string message;
@@ -156,6 +166,7 @@ class Parser {
                  }
                  std::get<Is>(result.values_) = std::move(consume_result.value);
                  steps_count = consume_result.advance;
+                 std::println("Steps: {}", steps_count);
                  ++parsed;
                  return true;
                }
