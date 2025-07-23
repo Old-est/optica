@@ -298,7 +298,7 @@ constexpr auto Arity() noexcept {
  * @tparam ValueType value which holds argument
  *
  * @remark
- * Parser will parse positional args relatively their's order 
+ * Parser will parse positional args relatively their order
  * in construction
  */
 template <FixedString Name, typename ValueType>
