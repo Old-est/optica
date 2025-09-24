@@ -1,0 +1,3 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+allowed_prefixes = ["feat", "fix", "doc", "perf", "refactor", "style", "test", "chore"]
