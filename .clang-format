@@ -1,0 +1,18 @@
+BasedOnStyle: Google
+IndentWidth: 4
+
+UseTab: Never
+AllowShortIfStatementsOnASingleLine: false
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 3
+
+UseCRLF: false
+AccessModifierOffset: -4
+EmptyLineBeforeAccessModifier: Always
+EmptyLineAfterAccessModifier: Never
+
+NamespaceIndentation: None
+BreakConstructorInitializers: BeforeComma
+
+SortIncludes: Never
+AlignConsecutiveMacros: Consecutive
